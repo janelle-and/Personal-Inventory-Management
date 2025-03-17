@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            btnSydney = new Button();
+            SuspendLayout();
+            // 
+            // btnSydney
+            // 
+            btnSydney.Location = new Point(148, 317);
+            btnSydney.Name = "btnSydney";
+            btnSydney.Size = new Size(94, 29);
+            btnSydney.TabIndex = 0;
+            btnSydney.Text = "Sydney";
+            btnSydney.UseVisualStyleBackColor = true;
+            btnSydney.Click += btnSydney_Click;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(btnSydney);
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnSydney;
     }
 }
