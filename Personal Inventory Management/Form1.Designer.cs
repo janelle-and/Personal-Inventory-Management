@@ -28,32 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnSydney = new Button();
+            propertyGrid1 = new PropertyGrid();
+            pictureBox1 = new PictureBox();
+            label1 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // btnSydney
+            // propertyGrid1
             // 
-            btnSydney.Location = new Point(148, 317);
-            btnSydney.Name = "btnSydney";
-            btnSydney.Size = new Size(94, 29);
-            btnSydney.TabIndex = 0;
-            btnSydney.Text = "Sydney";
-            btnSydney.UseVisualStyleBackColor = true;
-            btnSydney.Click += btnSydney_Click;
+            propertyGrid1.Location = new Point(12, 12);
+            propertyGrid1.Name = "propertyGrid1";
+            propertyGrid1.Size = new Size(1185, 361);
+            propertyGrid1.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(39, 55);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(123, 131);
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(73, 201);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 20);
+            label1.TabIndex = 2;
+            label1.Text = "label1";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnSydney);
+            ClientSize = new Size(1217, 665);
+            Controls.Add(label1);
+            Controls.Add(pictureBox1);
+            Controls.Add(propertyGrid1);
             Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private Button btnSydney;
+        private PropertyGrid propertyGrid1;
+        private PictureBox pictureBox1;
+        private Label label1;
     }
 }
