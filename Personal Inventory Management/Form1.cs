@@ -5,12 +5,15 @@ namespace Personal_Inventory_Management
 {
     public partial class Form1 : Form
     {
-        //    public Form1()
-        //    {
-        //        InitializeComponent();
-        //        Box Box1 = new Box("Box1", new List<Tuple<string, Boolean>>());
-        //        fLayMainDisplay.Controls.Add(CreateBoxControl(Box1));
-        //    }
+        public Form1()
+        {
+            InitializeComponent();
+            Box Box1 = new Box("Box1", new List<Tuple<string, Boolean>>());
+            Label txt = new Label();
+            txt.Name = "BoxName";
+            txt.Text = Box1.Name;
+            fLayMainDisplay.Controls.Add(txt);
+        }
 
         //    private Control CreateBoxControl(Box box)
         //    {
@@ -33,56 +36,57 @@ namespace Personal_Inventory_Management
 
         //    }
 
-        private void GetCast(int id)
-        {
-            using (var context = new MoviesEntities())
-            {
-                var Movies = context.movielinkpersons.Where(p => p.movieId == id).ToList();
-                int i = 1;
-                foreach (var person in Movies)
-                {
-                    string Thumb = "";
-                    if (person.person.profile_path == "/JohnWayneBig.png")
-                    {
-                        Thumb = ImgPath + "JohnWayneSml.png";
-                        BigPicturePath = ImgPath + "JohnWayneBig.png";
-
-                    }
-                    else
-                    {
-                        Thumb = ImgURL + "w45" + person.person.profile_path;
-                        BigPicturePath = ImgURL + "original" + person.person.profile_path;
-                    }
-
-                    var picture = new PictureBox
-                    {
-                        Name = "pictureBox" + i.ToString(),
-                        Size = new Size(45, 70),
-
-
-                    };
-                    picture.Tag = BigPicturePath;
-                    picture.MouseHover += ThumbPictureBox_MouseHover;
-                    picture.LoadAsync(Thumb);
-                    flowLayoutPanel1.Controls.Add(picture);
-                    i++;
-                }
-
-
-            }
-        }
-
-        private void ThumbPictureBox_MouseHover(object sender, EventArgs e)
-        {
-            //BigPicturePath = this.Tag.ToString();
-            if (BigPicturePath != null)
-            {
-                string Orientation = "P";
-                FilmsDB.PictureForm frm = new PictureForm(Orientation);
-                frm.SetValues(BigPicturePath);
-                frm.ShowDialog();
-            }
-
-        }
+        //     private void GetCast(int id)
+        //     {
+        //         using (var context = new MoviesEntities())
+        //         {
+        //             var Movies = context.movielinkpersons.Where(p => p.movieId == id).ToList();
+        //             int i = 1;
+        //             foreach (var person in Movies)
+        //             {
+        //                 string Thumb = "";
+        //                 if (person.person.profile_path == "/JohnWayneBig.png")
+        //                 {
+        //                     Thumb = ImgPath + "JohnWayneSml.png";
+        //                     BigPicturePath = ImgPath + "JohnWayneBig.png";
+        //
+        //                 }
+        //                 else
+        //                 {
+        //                     Thumb = ImgURL + "w45" + person.person.profile_path;
+        //                     BigPicturePath = ImgURL + "original" + person.person.profile_path;
+        //                 }
+        //
+        //                 var picture = new PictureBox
+        //                 {
+        //                     Name = "pictureBox" + i.ToString(),
+        //                     Size = new Size(45, 70),
+        //
+        //
+        //                 };
+        //                 picture.Tag = BigPicturePath;
+        //                 picture.MouseHover += ThumbPictureBox_MouseHover;
+        //                 picture.LoadAsync(Thumb);
+        //                 flowLayoutPanel1.Controls.Add(picture);
+        //                 i++;
+        //             }
+        //
+        //
+        //         }
+        //     }
+        //
+        //     private void ThumbPictureBox_MouseHover(object sender, EventArgs e)
+        //     {
+        //         //BigPicturePath = this.Tag.ToString();
+        //         if (BigPicturePath != null)
+        //         {
+        //             string Orientation = "P";
+        //             FilmsDB.PictureForm frm = new PictureForm(Orientation);
+        //             frm.SetValues(BigPicturePath);
+        //             frm.ShowDialog();
+        //         }
+        //
+        //     }
+        // }
     }
 }
