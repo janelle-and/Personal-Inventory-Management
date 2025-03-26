@@ -31,7 +31,6 @@
             lblName = new Label();
             lstItems = new ListBox();
             label1 = new Label();
-            this.btnChangeName = new Button();
             btnUpdateItem = new Button();
             btnDeleteItem = new Button();
             btnMoveToOutBox = new Button();
@@ -39,6 +38,7 @@
             btnCancel = new Button();
             txtName = new TextBox();
             btnDeleteBox = new Button();
+            btnChangeName = new Button();
             SuspendLayout();
             // 
             // lblName
@@ -66,15 +66,6 @@
             label1.Size = new Size(48, 20);
             label1.TabIndex = 3;
             label1.Text = "Items:";
-            // 
-            // btnChangeName
-            // 
-            this.btnChangeName.Location = new Point(248, 22);
-            this.btnChangeName.Name = "btnChangeName";
-            this.btnChangeName.Size = new Size(117, 29);
-            this.btnChangeName.TabIndex = 4;
-            this.btnChangeName.Text = "Change Name";
-            this.btnChangeName.UseVisualStyleBackColor = true;
             // 
             // btnUpdateItem
             // 
@@ -138,18 +129,27 @@
             btnDeleteBox.Text = "Delete Box";
             btnDeleteBox.UseVisualStyleBackColor = true;
             // 
+            // btnChangeName
+            // 
+            btnChangeName.Location = new Point(238, 22);
+            btnChangeName.Name = "btnChangeName";
+            btnChangeName.Size = new Size(124, 29);
+            btnChangeName.TabIndex = 11;
+            btnChangeName.Text = "Change Name";
+            btnChangeName.UseVisualStyleBackColor = true;
+            // 
             // frmBoxPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(408, 404);
+            Controls.Add(btnChangeName);
             Controls.Add(btnDeleteBox);
             Controls.Add(btnCancel);
             Controls.Add(btnAddItem);
             Controls.Add(btnMoveToOutBox);
             Controls.Add(btnDeleteItem);
             Controls.Add(btnUpdateItem);
-            Controls.Add(this.btnChangeName);
             Controls.Add(label1);
             Controls.Add(lstItems);
             Controls.Add(lblName);
@@ -172,5 +172,6 @@
         private Button btnCancel;
         private TextBox txtName;
         private Button btnDeleteBox;
+        private Button btnChangeName;
     }
 }
