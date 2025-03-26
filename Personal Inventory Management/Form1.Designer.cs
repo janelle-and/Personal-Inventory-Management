@@ -34,9 +34,10 @@
             // 
             // fLayMainDisplay
             // 
-            fLayMainDisplay.Location = new Point(64, 86);
+            fLayMainDisplay.AutoScroll = true;
+            fLayMainDisplay.Location = new Point(85, 86);
             fLayMainDisplay.Name = "fLayMainDisplay";
-            fLayMainDisplay.Size = new Size(573, 499);
+            fLayMainDisplay.Size = new Size(455, 499);
             fLayMainDisplay.TabIndex = 3;
             // 
             // groupBox1
@@ -56,7 +57,7 @@
             Controls.Add(groupBox1);
             Controls.Add(fLayMainDisplay);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Personal Inventory Management System";
             ResumeLayout(false);
         }
 
