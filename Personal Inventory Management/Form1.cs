@@ -3,16 +3,16 @@ using System.Windows.Forms;
 
 namespace Personal_Inventory_Management
 {
-    public partial class Form1 : Form
+    public partial class frmMainPage : Form
     {
-        public Form1()
+        public frmMainPage()
         {
             InitializeComponent();
             Box Box1 = new Box("Box1", new List<Tuple<string, Boolean>>());
             Label txt = new Label();
             txt.Name = "BoxName";
             txt.Text = Box1.Name;
-            fLayMainDisplay.Controls.Add(txt);
+            fLayMainDisplay.Controls.Add(CreateBoxControl(Box1));
         }
 
         private Control CreateBoxControl(Box box)
