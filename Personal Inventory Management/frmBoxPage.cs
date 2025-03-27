@@ -16,5 +16,10 @@ namespace Personal_Inventory_Management
         {
             InitializeComponent();
         }
+
+        public void getBoxPage()
+        {
+            this.ShowDialog();
+        }
     }
 }

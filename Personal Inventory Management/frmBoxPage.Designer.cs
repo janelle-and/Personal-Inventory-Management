@@ -136,7 +136,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 29);
             btnSave.TabIndex = 12;
-            btnSave.Text = "&Save";
+            btnSave.Text = "&Save/Exit";
             btnSave.UseVisualStyleBackColor = true;
             // 
             // lblitems

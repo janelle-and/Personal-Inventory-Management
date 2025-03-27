@@ -22,6 +22,8 @@ namespace Personal_Inventory_Management
             panel.Name = box.Name;
             panel.Size = new Size(200, 200);
             panel.BackColor = Color.LightGray;
+            panel.Tag = box.Name;
+            
             PictureBox pictureBox = new PictureBox();
             pictureBox.Name = "pictureBox";
             pictureBox.Size = new Size(200, 200);
@@ -31,10 +33,22 @@ namespace Personal_Inventory_Management
             if (File.Exists(path))
                 pictureBox.Image = Image.FromFile(path);
             panel.Controls.Add(pictureBox);
+
+            panel.Click += new EventHandler(Box_DoubleClick);
+            foreach (Control c in panel.Controls)
+            {
+                c.Click += new EventHandler(Box_DoubleClick);
+            }
             return panel;
         }
 
-      
+        private void Box_DoubleClick(object? sender, EventArgs e)
+        {
+            frmBoxPage boxPage = new frmBoxPage();
+            boxPage.getBoxPage();
+        }
+
+
 
 
         //     private void GetCast(int id)
