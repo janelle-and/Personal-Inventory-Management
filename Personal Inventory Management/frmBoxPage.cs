@@ -12,12 +12,13 @@ namespace Personal_Inventory_Management {
         public frmBoxPage() {
             InitializeComponent();
         }
-        private void button1_Click(object sender, EventArgs e) {
-            DialogResult = DialogResult.OK;
-            Close();
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK; // set dialog result to OK because the user wants to save the changes they made
+            Close(); // close form after sending confirm dialog
         }
         private void btnCancel_Click(object sender, EventArgs e) {
-            this.Close();
+            this.Close(); // close the form on cancel button click
         }
     }
 }
