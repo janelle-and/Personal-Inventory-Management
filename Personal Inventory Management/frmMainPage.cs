@@ -11,6 +11,9 @@ namespace Personal_Inventory_Management
             Box Box1 = new Box("Box1", new List<Tuple<string, Boolean>>());
             string txt = Box1.Name;
             fLayMainDisplay.Controls.Add(CreateBoxControl(Box1,txt));
+            Box Box2 = new Box("Box1", new List<Tuple<string, Boolean>>());
+            string txt2 = Box1.Name;
+            fLayMainDisplay.Controls.Add(CreateBoxControl(Box2,txt));
         }
 
         private Control CreateBoxControl(Box box,String boxName)
