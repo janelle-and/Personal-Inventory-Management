@@ -24,7 +24,7 @@ namespace Personal_Inventory_Management
             panel.BackColor = Color.LightGray;
             PictureBox pictureBox = new PictureBox();
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(200,200);
+            pictureBox.Size = new Size(200, 200);
             pictureBox.Location = new Point(0, 10);
             // Add additional properties and child controls to the panel as needed
             string path = "../../../project_Box_2.jpeg";
@@ -33,6 +33,9 @@ namespace Personal_Inventory_Management
             panel.Controls.Add(pictureBox);
             return panel;
         }
+
+      
+
 
         //     private void GetCast(int id)
         //     {

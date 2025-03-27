@@ -38,7 +38,8 @@
             txtName = new TextBox();
             btnDeleteBox = new Button();
             btnChangeName = new Button();
-            button1 = new Button();
+            btnSave = new Button();
+            lblitems = new Label();
             SuspendLayout();
             // 
             // lblName
@@ -129,21 +130,31 @@
             btnChangeName.Text = "Change Name";
             btnChangeName.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnSave
             // 
-            button1.Location = new Point(133, 334);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 12;
-            button1.Text = "&Save";
-            button1.UseVisualStyleBackColor = true;
+            btnSave.Location = new Point(133, 334);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(94, 29);
+            btnSave.TabIndex = 12;
+            btnSave.Text = "&Save";
+            btnSave.UseVisualStyleBackColor = true;
+            // 
+            // lblitems
+            // 
+            lblitems.AutoSize = true;
+            lblitems.Location = new Point(49, 80);
+            lblitems.Name = "lblitems";
+            lblitems.Size = new Size(48, 20);
+            lblitems.TabIndex = 13;
+            lblitems.Text = "Items:";
             // 
             // frmBoxPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(408, 404);
-            Controls.Add(button1);
+            Controls.Add(lblitems);
+            Controls.Add(btnSave);
             Controls.Add(btnChangeName);
             Controls.Add(btnDeleteBox);
             Controls.Add(btnCancel);
@@ -171,6 +182,7 @@
         private TextBox txtName;
         private Button btnDeleteBox;
         private Button btnChangeName;
-        private Button button1;
+        private Button btnSave;
+        private Label lblitems;
     }
 }

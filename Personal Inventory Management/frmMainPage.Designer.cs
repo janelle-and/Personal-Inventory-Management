@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             fLayMainDisplay = new FlowLayoutPanel();
-            textBox1 = new TextBox();
-            label1 = new Label();
+            txtSearch = new TextBox();
+            lblSearch = new Label();
             btnAdd = new Button();
             btnExit = new Button();
             lblSearchResult = new Label();
@@ -45,21 +45,21 @@
             fLayMainDisplay.Size = new Size(1058, 359);
             fLayMainDisplay.TabIndex = 3;
             // 
-            // textBox1
+            // txtSearch
             // 
-            textBox1.Location = new Point(925, 488);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(199, 27);
-            textBox1.TabIndex = 4;
+            txtSearch.Location = new Point(925, 488);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(199, 27);
+            txtSearch.TabIndex = 4;
             // 
-            // label1
+            // lblSearch
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(863, 491);
-            label1.Name = "label1";
-            label1.Size = new Size(56, 20);
-            label1.TabIndex = 5;
-            label1.Text = "Search:";
+            lblSearch.AutoSize = true;
+            lblSearch.Location = new Point(863, 491);
+            lblSearch.Name = "lblSearch";
+            lblSearch.Size = new Size(56, 20);
+            lblSearch.TabIndex = 5;
+            lblSearch.Text = "Search:";
             // 
             // btnAdd
             // 
@@ -96,8 +96,8 @@
             Controls.Add(lblSearchResult);
             Controls.Add(btnExit);
             Controls.Add(btnAdd);
-            Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(lblSearch);
+            Controls.Add(txtSearch);
             Controls.Add(fLayMainDisplay);
             Name = "frmMainPage";
             Text = "Personal Inventory Management System";
@@ -108,8 +108,8 @@
         #endregion
 
         private FlowLayoutPanel fLayMainDisplay;
-        private TextBox textBox1;
-        private Label label1;
+        private TextBox txtSearch;
+        private Label lblSearch;
         private Button btnAdd;
         private Button btnExit;
         private Label lblSearchResult;
