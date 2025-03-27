@@ -39,6 +39,7 @@
             // fLayMainDisplay
             // 
             fLayMainDisplay.AutoScroll = true;
+            fLayMainDisplay.BorderStyle = BorderStyle.FixedSingle;
             fLayMainDisplay.Location = new Point(85, 86);
             fLayMainDisplay.Name = "fLayMainDisplay";
             fLayMainDisplay.Size = new Size(1058, 359);
