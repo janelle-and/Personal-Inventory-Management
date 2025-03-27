@@ -68,6 +68,7 @@
             btnAdd.TabIndex = 6;
             btnAdd.Text = "&Add";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnExit
             // 
@@ -110,7 +111,7 @@
         private FlowLayoutPanel fLayMainDisplay;
         private TextBox textBox1;
         private Label label1;
-        private Button btnAdd;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExit;
         private Label lblSearchResult;
     }

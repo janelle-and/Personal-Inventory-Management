@@ -1,24 +1,22 @@
 using Microsoft.VisualBasic.Devices;
 using System.Windows.Forms;
-
-namespace Personal_Inventory_Management
-{
-    public partial class frmMainPage : Form
-    {
-        public frmMainPage()
-        {
+namespace Personal_Inventory_Management {
+    public partial class frmMainPage : Form {
+        public frmMainPage() {
             InitializeComponent();
-            Box Box1 = new Box("Box1", new List<Tuple<string, Boolean>>());
-            string txt = Box1.Name;
-            fLayMainDisplay.Controls.Add(CreateBoxControl(Box1,txt));
-            Box Box2 = new Box("Box1", new List<Tuple<string, Boolean>>());
-            string txt2 = Box1.Name;
-            fLayMainDisplay.Controls.Add(CreateBoxControl(Box2,txt));
         }
-
-        private Control CreateBoxControl(Box box,String boxName)
-        {
-            // Create a new Panel or any other Control to represent the Box
+        private void btnExit_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+        private void btnAdd_Click(object sender, EventArgs e) {
+            frmBoxPage addboxpage = new frmBoxPage();
+            if (addboxpage.ShowDialog() == DialogResult.OK) {
+                Box box1 = new Box("box1", new List<Tuple<string, bool>>());
+                String boxName1 = box1.Name;
+                fLayMainDisplay.Controls.Add(CreateBoxControl(box1,boxName1));
+            }
+        }
+        private Control CreateBoxControl(Box box,String boxName) {
             Panel panel = new Panel();
             panel.Name = box.Name;
             panel.Size = new Size(100, 150);
@@ -32,17 +30,11 @@ namespace Personal_Inventory_Management
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Size = new Size(100,100);
             pictureBox.Location = new Point(0, 0);
-            // Add additional properties and child controls to the panel as needed
             string path = "../../../project_Box_2.jpeg";
             if (File.Exists(path))
                 pictureBox.Image = Image.FromFile(path);
             panel.Controls.Add(pictureBox);
             return panel;
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
