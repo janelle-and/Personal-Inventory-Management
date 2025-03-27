@@ -30,7 +30,6 @@
         {
             lblName = new Label();
             lstItems = new ListBox();
-            label1 = new Label();
             btnUpdateItem = new Button();
             btnDeleteItem = new Button();
             btnMoveToOutBox = new Button();
@@ -39,6 +38,7 @@
             txtName = new TextBox();
             btnDeleteBox = new Button();
             btnChangeName = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // lblName
@@ -57,15 +57,6 @@
             lstItems.Name = "lstItems";
             lstItems.Size = new Size(150, 184);
             lstItems.TabIndex = 2;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(49, 77);
-            label1.Name = "label1";
-            label1.Size = new Size(48, 20);
-            label1.TabIndex = 3;
-            label1.Text = "Items:";
             // 
             // btnUpdateItem
             // 
@@ -105,11 +96,11 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(77, 334);
+            btnCancel.Location = new Point(32, 334);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(94, 29);
             btnCancel.TabIndex = 9;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "&Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // txtName
@@ -122,7 +113,7 @@
             // 
             // btnDeleteBox
             // 
-            btnDeleteBox.Location = new Point(224, 334);
+            btnDeleteBox.Location = new Point(281, 334);
             btnDeleteBox.Name = "btnDeleteBox";
             btnDeleteBox.Size = new Size(94, 29);
             btnDeleteBox.TabIndex = 10;
@@ -138,11 +129,21 @@
             btnChangeName.Text = "Change Name";
             btnChangeName.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            button1.Location = new Point(133, 334);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 12;
+            button1.Text = "&Save";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // frmBoxPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(408, 404);
+            Controls.Add(button1);
             Controls.Add(btnChangeName);
             Controls.Add(btnDeleteBox);
             Controls.Add(btnCancel);
@@ -150,7 +151,6 @@
             Controls.Add(btnMoveToOutBox);
             Controls.Add(btnDeleteItem);
             Controls.Add(btnUpdateItem);
-            Controls.Add(label1);
             Controls.Add(lstItems);
             Controls.Add(lblName);
             Controls.Add(txtName);
@@ -163,7 +163,6 @@
         #endregion
         private Label lblName;
         private ListBox lstItems;
-        private Label label1;
         private Button btnUpdateItem;
         private Button btnDeleteItem;
         private Button btnMoveToOutBox;
@@ -172,5 +171,6 @@
         private TextBox txtName;
         private Button btnDeleteBox;
         private Button btnChangeName;
+        private Button button1;
     }
 }
