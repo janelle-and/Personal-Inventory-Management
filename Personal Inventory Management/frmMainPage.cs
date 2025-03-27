@@ -24,12 +24,13 @@ namespace Personal_Inventory_Management
             panel.BackColor = Color.LightGray;
             PictureBox pictureBox = new PictureBox();
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(100, 100);
-            pictureBox.Location = new Point(50, 50);
+            pictureBox.Size = new Size(200,200);
+            pictureBox.Location = new Point(0, 10);
             // Add additional properties and child controls to the panel as needed
-            string path = "Personal Inventory Management/project_Box_2.jpeg";
+            string path = "../../../project_Box_2.jpeg";
             if (File.Exists(path))
                 pictureBox.Image = Image.FromFile(path);
+            panel.Controls.Add(pictureBox);
             return panel;
         }
 

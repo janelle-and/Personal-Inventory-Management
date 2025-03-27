@@ -164,7 +164,6 @@
         private Label lblName;
         private ListBox lstItems;
         private Label label1;
-        private Button Chang;
         private Button btnUpdateItem;
         private Button btnDeleteItem;
         private Button btnMoveToOutBox;

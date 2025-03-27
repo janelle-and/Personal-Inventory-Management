@@ -41,7 +41,7 @@
             fLayMainDisplay.AutoScroll = true;
             fLayMainDisplay.Location = new Point(85, 86);
             fLayMainDisplay.Name = "fLayMainDisplay";
-            fLayMainDisplay.Size = new Size(1039, 359);
+            fLayMainDisplay.Size = new Size(1058, 359);
             fLayMainDisplay.TabIndex = 3;
             // 
             // textBox1
