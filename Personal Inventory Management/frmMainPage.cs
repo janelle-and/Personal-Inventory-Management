@@ -34,7 +34,19 @@ namespace Personal_Inventory_Management {
             if (File.Exists(path))
                 pictureBox.Image = Image.FromFile(path);
             panel.Controls.Add(pictureBox);
+
+            panel.Click += new EventHandler(Box_Click);
+            foreach (Control c in panel.Controls)
+            {
+                c.Click += new EventHandler(Box_Click);
+            }
             return panel;
+        }
+
+        private void Box_Click(object? sender, EventArgs e)
+        {
+            frmBoxPage boxPage = new frmBoxPage();
+            boxPage.ShowDialog();
         }
     }
 }
