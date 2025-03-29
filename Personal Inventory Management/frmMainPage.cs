@@ -2,11 +2,11 @@ using Microsoft.VisualBasic.Devices;
 using System.Windows.Forms;
 namespace Personal_Inventory_Management {
     public partial class frmMainPage : Form {
+        /* initialize and display the OutBox on program start as it should always be there */
+        static Box OutBox = new Box("OutBox", new List<Tuple<string, bool>>());
+        String OutboxName = OutBox.Name;
         public frmMainPage() {
             InitializeComponent(); // start and show the main form
-            /* initialize and display the OutBox on program start as it should always be there */
-            Box OutBox = new Box("OutBox", new List<Tuple<string, bool>>());
-            String OutboxName = OutBox.Name;
             fLayMainDisplay.Controls.Add(CreateBoxControl(OutBox,OutboxName));
         }
         frmBoxPage addboxpage = new frmBoxPage(); // initialize the addboxpage form
@@ -25,7 +25,7 @@ namespace Personal_Inventory_Management {
             Panel panel = new Panel();
             panel.Name = box.Name;
             panel.Size = new Size(100, 150);
-            panel.BackColor = Color.LightGray;
+            panel.BackColor = Color.White;
             /* setup the label for the box panel */
             Label boxTitle = new Label();
             boxTitle.Text = boxName;
@@ -55,18 +55,21 @@ namespace Personal_Inventory_Management {
         private void Box_Click(object? sender, EventArgs e)
         {
             frmBoxPage boxPage = addboxpage; // create a new boxpage when clicking on the box
+            Box box = new Box("", new List<Tuple<string, bool>>()); // initialize a new box to store the updated version
             /* show the box form and save changes if user clicks save */
             switch (boxPage.ShowDialog()) {
             case DialogResult.OK:
-                Box box = new Box("", new List<Tuple<string, bool>>()); // initialize a new box to store the updated version
-                box = boxPage.newBox; // save the updated box
                 if (box.Name == boxPage.newBox.Name && box.items == boxPage.newBox.items) { return; } // don't remove the panel or create a new one if the boxes are the same (meaning the user hasnt changed anything) and the user clicks save
+                box = boxPage.newBox; // save the updated box
                 fLayMainDisplay.Controls.Remove(sender as Control); // remove the panel for the outdated box
                 fLayMainDisplay.Controls.Add(CreateBoxControl(box, box.Name)); // add the updated box
                 break;
             case DialogResult.No:
             fLayMainDisplay.Controls.Remove(sender as Control); // remove the panel for the box user wants to delete
             break;
+            case DialogResult.Ignore:
+                OutBox.items.Add(boxPage.sending.items[0]);
+                break;
             }
         }
         private void btnExit_Click(object sender, EventArgs e) {

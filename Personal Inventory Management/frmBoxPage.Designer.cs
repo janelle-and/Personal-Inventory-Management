@@ -55,44 +55,48 @@
             lstItems.ItemHeight = 15;
             lstItems.Location = new System.Drawing.Point(19, 51);
             lstItems.Name = "lstItems";
-            lstItems.Size = new System.Drawing.Size(208, 214);
+            lstItems.Size = new System.Drawing.Size(536, 214);
             lstItems.TabIndex = 2;
             // 
             // btnUpdateItem
             // 
-            btnUpdateItem.Location = new System.Drawing.Point(248, 109);
+            btnUpdateItem.Location = new System.Drawing.Point(561, 109);
             btnUpdateItem.Name = "btnUpdateItem";
             btnUpdateItem.Size = new System.Drawing.Size(108, 29);
             btnUpdateItem.TabIndex = 5;
             btnUpdateItem.Text = "Update Item";
             btnUpdateItem.UseVisualStyleBackColor = true;
+            btnUpdateItem.Click += btnUpdateItem_Click;
             // 
             // btnDeleteItem
             // 
-            btnDeleteItem.Location = new System.Drawing.Point(248, 173);
+            btnDeleteItem.Location = new System.Drawing.Point(561, 173);
             btnDeleteItem.Name = "btnDeleteItem";
             btnDeleteItem.Size = new System.Drawing.Size(108, 29);
             btnDeleteItem.TabIndex = 6;
             btnDeleteItem.Text = "Delete Item";
             btnDeleteItem.UseVisualStyleBackColor = true;
+            btnDeleteItem.Click += btnDeleteItem_Click;
             // 
             // btnMoveToOutBox
             // 
-            btnMoveToOutBox.Location = new System.Drawing.Point(248, 236);
+            btnMoveToOutBox.Location = new System.Drawing.Point(561, 236);
             btnMoveToOutBox.Name = "btnMoveToOutBox";
             btnMoveToOutBox.Size = new System.Drawing.Size(108, 29);
             btnMoveToOutBox.TabIndex = 7;
             btnMoveToOutBox.Text = "Move To OutBox";
             btnMoveToOutBox.UseVisualStyleBackColor = true;
+            btnMoveToOutBox.Click += btnMoveToOutBox_Click;
             // 
             // btnAddItem
             // 
-            btnAddItem.Location = new System.Drawing.Point(248, 51);
+            btnAddItem.Location = new System.Drawing.Point(561, 51);
             btnAddItem.Name = "btnAddItem";
             btnAddItem.Size = new System.Drawing.Size(108, 29);
             btnAddItem.TabIndex = 8;
             btnAddItem.Text = "Add Item";
             btnAddItem.UseVisualStyleBackColor = true;
+            btnAddItem.Click += btnAddItem_Click;
             // 
             // btnCancel
             // 
@@ -102,7 +106,6 @@
             btnCancel.TabIndex = 9;
             btnCancel.Text = "&Cancel";
             btnCancel.UseVisualStyleBackColor = true;
-            btnCancel.Click += btnCancel_Click;
             // 
             // txtName
             // 
@@ -113,7 +116,7 @@
             // 
             // btnDeleteBox
             // 
-            btnDeleteBox.Location = new System.Drawing.Point(248, 284);
+            btnDeleteBox.Location = new System.Drawing.Point(561, 284);
             btnDeleteBox.Name = "btnDeleteBox";
             btnDeleteBox.Size = new System.Drawing.Size(108, 29);
             btnDeleteBox.TabIndex = 10;
@@ -123,7 +126,7 @@
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(120, 284);
+            button1.Location = new System.Drawing.Point(306, 284);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(94, 29);
             button1.TabIndex = 12;
@@ -135,7 +138,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(370, 330);
+            ClientSize = new System.Drawing.Size(705, 330);
             Controls.Add(button1);
             Controls.Add(btnDeleteBox);
             Controls.Add(btnCancel);
