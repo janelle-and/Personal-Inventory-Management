@@ -34,19 +34,21 @@
             btnAdd = new System.Windows.Forms.Button();
             btnExit = new System.Windows.Forms.Button();
             lblSearchResult = new System.Windows.Forms.Label();
+            lblResult = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // fLayMainDisplay
             // 
             fLayMainDisplay.AutoScroll = true;
-            fLayMainDisplay.Location = new System.Drawing.Point(85, 86);
+            fLayMainDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            fLayMainDisplay.Location = new System.Drawing.Point(12, 12);
             fLayMainDisplay.Name = "fLayMainDisplay";
             fLayMainDisplay.Size = new System.Drawing.Size(1058, 359);
             fLayMainDisplay.TabIndex = 3;
             // 
             // textBox1
             // 
-            textBox1.Location = new System.Drawing.Point(925, 488);
+            textBox1.Location = new System.Drawing.Point(871, 421);
             textBox1.Name = "textBox1";
             textBox1.Size = new System.Drawing.Size(199, 23);
             textBox1.TabIndex = 4;
@@ -54,7 +56,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(863, 491);
+            label1.Location = new System.Drawing.Point(790, 424);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(45, 15);
             label1.TabIndex = 5;
@@ -62,7 +64,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new System.Drawing.Point(58, 528);
+            btnAdd.Location = new System.Drawing.Point(12, 417);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(94, 29);
             btnAdd.TabIndex = 6;
@@ -72,7 +74,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new System.Drawing.Point(215, 528);
+            btnExit.Location = new System.Drawing.Point(138, 417);
             btnExit.Name = "btnExit";
             btnExit.Size = new System.Drawing.Size(94, 29);
             btnExit.TabIndex = 7;
@@ -83,17 +85,26 @@
             // lblSearchResult
             // 
             lblSearchResult.AutoSize = true;
-            lblSearchResult.Location = new System.Drawing.Point(863, 547);
+            lblSearchResult.Location = new System.Drawing.Point(790, 473);
             lblSearchResult.Name = "lblSearchResult";
             lblSearchResult.Size = new System.Drawing.Size(42, 15);
             lblSearchResult.TabIndex = 8;
             lblSearchResult.Text = "Result:";
             // 
+            // lblResult
+            // 
+            lblResult.Location = new System.Drawing.Point(871, 473);
+            lblResult.Name = "lblResult";
+            lblResult.Size = new System.Drawing.Size(199, 23);
+            lblResult.TabIndex = 9;
+            lblResult.Text = "This is some placeholder text";
+            // 
             // frmMainPage
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1217, 665);
+            ClientSize = new System.Drawing.Size(1091, 535);
+            Controls.Add(lblResult);
             Controls.Add(lblSearchResult);
             Controls.Add(btnExit);
             Controls.Add(btnAdd);
@@ -106,13 +117,15 @@
             PerformLayout();
         }
 
+        private System.Windows.Forms.Label lblResult;
+
         #endregion
 
-        private FlowLayoutPanel fLayMainDisplay;
-        private TextBox textBox1;
-        private Label label1;
+        private System.Windows.Forms.FlowLayoutPanel fLayMainDisplay;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExit;
-        private Label lblSearchResult;
+        private System.Windows.Forms.Label lblSearchResult;
     }
 }
