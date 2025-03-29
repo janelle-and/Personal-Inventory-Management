@@ -2,16 +2,31 @@ using Microsoft.VisualBasic.Devices;
 using System.Windows.Forms;
 namespace Personal_Inventory_Management {
     public partial class frmMainPage : Form {
-        /* initialize and display the OutBox on program start as it should always be there */
+        /* initialize and display the OutBox on program start */
         static Box OutBox = new Box("OutBox", new List<Tuple<string, bool>>());
         String OutboxName = OutBox.Name;
+        private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
         public frmMainPage() {
             InitializeComponent(); // start and show the main form
-            fLayMainDisplay.Controls.Add(CreateBoxControl(OutBox,OutboxName));
+            _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
+            fLayMainDisplay.Controls.Add(CreateBoxControl(OutBox,OutboxName)); // display the OutBox as it should always be there
         }
-        frmBoxPage addboxpage = new frmBoxPage(); // initialize the addboxpage form
+        Box emptyBox = new Box("", new List<Tuple<string, bool>>()); // create an empty box to use with the add button
+        private Box _currentBox; // Private backing field for the CurrentBox property
+        /* Public property for accessing and setting the _currentBox field */
+        public Box CurrentBox {
+            get { return _currentBox; } // Returns the value of _currentBox
+            /* Sets the value of _currentBox if the new value is different from the current one */
+            set {
+                /* Check if the new value is different from the current value */
+                if (_currentBox != value) {
+                    _currentBox = value; // If different, update the private field to the new value
+                }
+            }
+        }
         /* function to handle what happens when the add button on the main form is clicked */
         private void btnAdd_Click(object sender, EventArgs e) {
+            frmBoxPage addboxpage = new frmBoxPage(emptyBox); // initialize the addboxpage form
             /* handle the logic for using the addboxpage form */
             if (addboxpage.ShowDialog() == DialogResult.OK) {
                 Box newBox = addboxpage.newBox; // when the form is closed with the save button create a new box
@@ -44,6 +59,7 @@ namespace Personal_Inventory_Management {
             if (File.Exists(path)) {
                 pictureBox.Image = Image.FromFile(path);
             }
+            _boxPanelsDict[panel] = box; // get the box object for the new panel
             panel.Controls.Add(pictureBox); // add the picture to the panel
             panel.Click += new EventHandler(Box_Click); // make the box panel clickable
             /* get the box panel user clicked on from the available panels */
@@ -52,26 +68,49 @@ namespace Personal_Inventory_Management {
             }
             return panel; // return the panel so the panel can be displayed
         }
-        private void Box_Click(object? sender, EventArgs e)
-        {
-            frmBoxPage boxPage = addboxpage; // create a new boxpage when clicking on the box
-            Box box = new Box("", new List<Tuple<string, bool>>()); // initialize a new box to store the updated version
-            /* show the box form and save changes if user clicks save */
-            switch (boxPage.ShowDialog()) {
-            case DialogResult.OK:
-                if (box.Name == boxPage.newBox.Name && box.items == boxPage.newBox.items) { return; } // don't remove the panel or create a new one if the boxes are the same (meaning the user hasnt changed anything) and the user clicks save
-                box = boxPage.newBox; // save the updated box
-                fLayMainDisplay.Controls.Remove(sender as Control); // remove the panel for the outdated box
-                fLayMainDisplay.Controls.Add(CreateBoxControl(box, box.Name)); // add the updated box
-                break;
-            case DialogResult.No:
-            fLayMainDisplay.Controls.Remove(sender as Control); // remove the panel for the box user wants to delete
-            break;
-            case DialogResult.Ignore:
-                OutBox.items.Add(boxPage.sending.items[0]);
-                break;
+        /* function to handle when the user clicks on a box panel */
+        private void Box_Click(object? sender, EventArgs e) {
+            /* make sure the user clicked on the actual panel */
+            if (sender.GetType() != typeof(Panel)) {
+                MessageBox.Show("Please select a box first!"); // show a messagebox telling the user to select a panel
+                return; // return from function so nothing happens
+            }
+            /* Get the Box corresponding to the clicked Panel */
+            Panel clickedPanel = sender as Panel; // save the clicked panel as a variable
+            Box selectedBox = _boxPanelsDict[clickedPanel]; // Get the box associated with this panel
+            frmBoxPage boxPage = new frmBoxPage(selectedBox); // Create a new frmBoxPage to passing the selected Box to be edited
+            /* Show the box form and handle the result when the user clicks Save or Cancel */
+            DialogResult result = boxPage.ShowDialog(); // Get the result of the dialog
+            /*If Cancel was clicked, do not save or update anything */
+            if (result == DialogResult.Cancel) {
+                return; // return from the function so nothing happens
+            }
+            /* switch case to handle the other dialog results (user actions from the boxPage form) */
+            switch (result) {
+                /* user clicked save */
+                case DialogResult.OK:
+                    /* Only update if changes were made */
+                    if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items)) {
+                        _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary
+                        fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the outdated panel
+                        fLayMainDisplay.Controls.Add(CreateBoxControl(boxPage.newBox, boxPage.newBox.Name)); // Add updated box panel
+                    }
+                    break;
+                /* user clicked delele box */
+                case DialogResult.No:
+                    _boxPanelsDict.Remove(clickedPanel); // Remove the box reference from the dictionary
+                    fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the panel from the layout
+                    break;
+                /* user added item to outbox */
+                case DialogResult.Ignore:
+                    /* If the user moved an item to the OutBox, add it to OutBox items */
+                    if (boxPage.sending != null && boxPage.sending.items.Count > 0) {
+                        OutBox.items.Add(boxPage.sending.items[0]);
+                    }
+                    break;
             }
         }
+        /* function to handle when the user clicks the exit button */
         private void btnExit_Click(object sender, EventArgs e) {
             this.Close(); // close the main form when exit button is clicked
         }

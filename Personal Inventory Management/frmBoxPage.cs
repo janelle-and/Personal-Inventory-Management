@@ -10,39 +10,54 @@ using System.Windows.Forms;
 namespace Personal_Inventory_Management {
     public partial class frmBoxPage : Form {
         public Box newBox { get;  set; } // initialize a new box object
-        public Box sending { get ; set; }
-        public frmBoxPage() {
+        public Box sending { get ; set; } // initialize the box for sending things to the outbox
+        public frmBoxPage(Box box) {
             InitializeComponent();
+            newBox = new Box(box.Name, new List<Tuple<string, bool>>(box.items)); // Create a copy of the passed box to work with in this form
+            /* Make sure the box name isn't empty */
+            if (!string.IsNullOrEmpty(box.Name)) {
+                txtName.Text = box.Name; // set the Name textbox text to the name of the box
+            }
+            lstItems.Items.Clear(); // Clear any existing items in the listbox before adding new ones
+            /* Add the items from the Box's items list to the ListBox display */
+            if (box.items.Count > 0) {
+                foreach (var item in box.items) {
+                    lstItems.Items.Add(item);
+                }
+            }
         }
+        /* function to handle when the user clicks the save button */
         private void button1_Click(object sender, EventArgs e) { 
-            /* make sure the box name isn't empty before saving it */
+            /* Make sure the box name isn't empty before saving */
             if (txtName.Text.Length >= 1) {
-                newBox = new Box(txtName.Text, new List<Tuple<string, bool>>()); // store the info for the new box
-                DialogResult = DialogResult.OK; // set dialog result to OK because the user wants to save the changes they made
-                this.Close(); // close form after sending confirm dialog
+                newBox.Name = txtName.Text; // save the new name of the box
+                DialogResult = DialogResult.OK; // Set the dialog result to OK because the user wants to save the changes
+                this.Close(); // Close the form
             }
-            /* show a message box if it is */
             else {
-                MessageBox.Show("Please enter a name for the box");
+                MessageBox.Show("Please enter a name for the box"); // show a message box telling the user to give the box name
             }
         }
+        /* funciton to handle when the user clicks the add item button */
         private void btnAddItem_Click(object sender, EventArgs e) {
-            newBox.items.Add(new Tuple<string, bool>("Winter Boots | My favourite winter boots :)", false));
-            lstItems.Items.Add(newBox.items[0]);
+            newBox.items.Add(new Tuple<string, bool>("Winter Boots | My favourite winter boots :)", false)); // currently hard coded but this adds the item to the box item list
+            lstItems.Items.Add(newBox.items[0]); // display the newly added item in the listbox display
         }
+        /* function to handle when the user clicks the update item button */
         private void btnUpdateItem_Click(object sender, EventArgs e) {
             int index = lstItems.SelectedIndex; // get the index of the selected item
             /* make sure its a valid index before doing anything */
             if (index != -1) {
                 var modifiedItem = new Tuple<string, bool>("newStringValue", false); // set the values for the updated item
-                newBox.items[index] = modifiedItem; // add the updated item to the box list
-                lstItems.Items[index] = modifiedItem; // add the updated item to the listbox dispaly
+                newBox.items[index] = modifiedItem; // add the updated item to the box list by replacing the old version
+                lstItems.Items[index] = modifiedItem; // add the updated item to the listbox dispaly by replacing the old version
             }
             else {
-                MessageBox.Show("Please select an item to update");
+                MessageBox.Show("Please select an item to update"); // show a messagebox telling the user to select an item to update
             }
             index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
         }
+        /* function to handle when the user clicks the delete item button */
         private void btnDeleteItem_Click(object sender, EventArgs e) {
             int index = lstItems.SelectedIndex; // get the index of the selected item
             /* make sure its a valid index before doing anything */
@@ -51,25 +66,31 @@ namespace Personal_Inventory_Management {
                 lstItems.Items.RemoveAt(index); // remove the item from listbox display
             }
             else {
-                MessageBox.Show("Please select an item to delete");
+                MessageBox.Show("Please select an item to delete"); // show a messagebox telling the user to select an item to delete
             }
             index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
         }
+        /* function to handle when the user clicks the delete box button */
         private void btnDeleteBox_Click_1(object sender, EventArgs e) {
             DialogResult = DialogResult.No; // send a different DialogResult if the user wants to delete the box
             this.Close();
         }
+        /* function to handle when the user clicks the move to outbox button */
         private void btnMoveToOutBox_Click(object sender, EventArgs e) {
-            int index = lstItems.SelectedIndex; // get the index of the selected item
-            /* make sure its a valid index before doing anything */
+            int index = lstItems.SelectedIndex; // Get the index of the selected item
             if (index != -1) {
-                sending.items.Add(newBox.items[index]);
-            }
+                var selectedItem = newBox.items[index]; // store the selected item
+                sending.items.Add(selectedItem); // Add the entire tuple to the sending box
+            } 
             else {
-                MessageBox.Show("Please select an item to send to the outbox");
+                MessageBox.Show("Please select an item to send to the outbox"); // show a messagebox telling the user to select an item to send to the outbox
             }
-            index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
             DialogResult = DialogResult.Ignore;
+            this.Close();
+        }
+        /* function to handle when the user clicks the cancel button */
+        private void btnCancel_Click(object sender, EventArgs e) {
+            DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }
