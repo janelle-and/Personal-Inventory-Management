@@ -3,14 +3,12 @@ public partial class frmItemData : Form {
     /* initialize public variables for the info so it can be passed the the calling form */
     public string itemname = "";
     public string itemdesc = "";
-    public bool status = false;
     private string partone = "";
     private string[] splits;
     private string parttwo = "";
     private bool passedstatus = false;
     // Declare a private field to store the box object
     private Box? box;
-
     public frmItemData(Box? box, int? index) {
         InitializeComponent();
         this.box = box; // Store the box in the class-level variable
@@ -18,6 +16,7 @@ public partial class frmItemData : Form {
         if (index.HasValue) {
             validIndex = index.Value;
         }
+        lblStatusState.Text = "No";
         handleBox(box, validIndex);
     }
     private void handleBox(Box passed, int indexed) {
@@ -31,10 +30,10 @@ public partial class frmItemData : Form {
             txtItemName.Text = splits[0].Trim();  // Set item name as the first part of the split
             txtItemDescription.Text = parttwo;  // Set description from the second part of the split
             /* Set radio button selection based on the passed status */
-            if (passedstatus) {
-                rdbYes.Checked = true;
+            if (passedstatus) { ;
+                lblStatusState.Text = "Yes";
             } else {
-                rdbNo.Checked = true;
+                lblStatusState.Text = "No";
             }
         }
     }
@@ -45,21 +44,14 @@ public partial class frmItemData : Form {
                 MessageBox.Show("Please enter an item name."); // display a messagebox telling the user to enter an item name if its empty
                 return; // return from the function so the form doesnt close and the user can make the required changes
             }
-            /* make sure at least one radio button is clicked */
-            if (rdbNo.Checked == false && rdbYes.Checked == false) {
-                MessageBox.Show("Please choose a status");
-                return;
-            }
+            // /* make sure at least one radio button is clicked */
+            // if (rdbNo.Checked == false && rdbYes.Checked == false) {
+            //     MessageBox.Show("Please choose a status");
+            //     return;
+            // }
             /* store the values */
             itemname = txtItemName.Text;
             itemdesc = txtItemDescription.Text;
-            /* check which radio button is checked and change status accordingly */
-            if (rdbNo.Checked) {
-                status = false;
-            }
-            else {
-                status = true;
-            }
             DialogResult = DialogResult.OK;
             this.Close();
     }

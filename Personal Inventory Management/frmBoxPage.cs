@@ -58,17 +58,16 @@ namespace Personal_Inventory_Management {
                 case DialogResult.OK:
                     itemname = itemData.itemname; // save the itemname
                     itemdescription = itemData.itemdesc; // save the itemdescription
-                    itemstatus = itemData.status; // save the outbox status
                     TotalItem = itemData.itemname; // set the TotalItem to the name so the item description can be added to it
                     /* check if the user left the item description empty */
                     if (string.IsNullOrEmpty(itemdescription)) {
                         TotalItem = itemData.itemname + " | No description provided";
-                        newBox.items.Add(new Tuple<string, bool>(TotalItem, itemstatus)); // currently hard coded but this adds the item to the box item list
+                        newBox.items.Add(new Tuple<string, bool>(TotalItem, false)); // currently hard coded but this adds the item to the box item list
                         lstItems.Items.Add(newBox.items.Last()); // display the newly added item in the listbox display
                     }
                     else {
                         TotalItem += " | "  + itemdescription;
-                        newBox.items.Add(new Tuple<string, bool>(TotalItem, itemstatus));
+                        newBox.items.Add(new Tuple<string, bool>(TotalItem, false));
                         lstItems.Items.Add(newBox.items.Last());
                     }
                     /* reset the variables after the item is added */
@@ -88,7 +87,6 @@ namespace Personal_Inventory_Management {
                     case DialogResult.OK:
                         itemname = itemData.itemname; // save the itemname
                         itemdescription = itemData.itemdesc; // save the itemdescription
-                        itemstatus = itemData.status; // save the outbox status
                         TotalItem = itemData.itemname; // set the TotalItem to the name so the item description can be added to it
                         if (string.IsNullOrEmpty(itemdescription)) {
                             TotalItem = itemData.itemname + " | No description provided";
@@ -96,7 +94,7 @@ namespace Personal_Inventory_Management {
                         else {
                             TotalItem += " | "  + itemdescription;
                         }
-                        var modifiedItem = new Tuple<string, bool>(TotalItem, itemstatus); // set the values for the updated item
+                        var modifiedItem = new Tuple<string, bool>(TotalItem, false); // set the values for the updated item
                         newBox.items[index] = modifiedItem; // add the updated item to the box list by replacing the old version
                         lstItems.Items[index] = modifiedItem; // add the updated item to the listbox dispaly by replacing the old version
                         break;

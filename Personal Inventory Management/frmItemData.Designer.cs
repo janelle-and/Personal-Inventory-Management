@@ -36,10 +36,9 @@ partial class frmItemData
         lblItemDescription = new System.Windows.Forms.Label();
         txtItemDescription = new System.Windows.Forms.TextBox();
         lblstatus = new System.Windows.Forms.Label();
-        rdbYes = new System.Windows.Forms.RadioButton();
-        rdbNo = new System.Windows.Forms.RadioButton();
         btnSave = new System.Windows.Forms.Button();
         btnCancel = new System.Windows.Forms.Button();
+        lblStatusState = new System.Windows.Forms.Label();
         SuspendLayout();
         // 
         // lblItemName
@@ -80,26 +79,6 @@ partial class frmItemData
         lblstatus.TabIndex = 4;
         lblstatus.Text = "Is this item taken out already?";
         // 
-        // rdbYes
-        // 
-        rdbYes.Location = new System.Drawing.Point(103, 133);
-        rdbYes.Name = "rdbYes";
-        rdbYes.Size = new System.Drawing.Size(47, 24);
-        rdbYes.TabIndex = 5;
-        rdbYes.TabStop = true;
-        rdbYes.Text = "yes";
-        rdbYes.UseVisualStyleBackColor = true;
-        // 
-        // rdbNo
-        // 
-        rdbNo.Location = new System.Drawing.Point(167, 133);
-        rdbNo.Name = "rdbNo";
-        rdbNo.Size = new System.Drawing.Size(47, 24);
-        rdbNo.TabIndex = 6;
-        rdbNo.TabStop = true;
-        rdbNo.Text = "No";
-        rdbNo.UseVisualStyleBackColor = true;
-        // 
         // btnSave
         // 
         btnSave.Location = new System.Drawing.Point(75, 176);
@@ -120,15 +99,22 @@ partial class frmItemData
         btnCancel.UseVisualStyleBackColor = true;
         btnCancel.Click += btnCancel_Click;
         // 
+        // lblStatusState
+        // 
+        lblStatusState.Location = new System.Drawing.Point(105, 130);
+        lblStatusState.Name = "lblStatusState";
+        lblStatusState.Size = new System.Drawing.Size(100, 23);
+        lblStatusState.TabIndex = 9;
+        lblStatusState.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+        // 
         // frmItemData
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(322, 221);
+        Controls.Add(lblStatusState);
         Controls.Add(btnCancel);
         Controls.Add(btnSave);
-        Controls.Add(rdbNo);
-        Controls.Add(rdbYes);
         Controls.Add(lblstatus);
         Controls.Add(txtItemDescription);
         Controls.Add(lblItemDescription);
@@ -139,13 +125,13 @@ partial class frmItemData
         PerformLayout();
     }
 
+    private System.Windows.Forms.Label lblStatusState;
+
     private System.Windows.Forms.Label lblItemName;
     private System.Windows.Forms.TextBox txtItemName;
     private System.Windows.Forms.Label lblItemDescription;
     private System.Windows.Forms.TextBox txtItemDescription;
     private System.Windows.Forms.Label lblstatus;
-    private System.Windows.Forms.RadioButton rdbYes;
-    private System.Windows.Forms.RadioButton rdbNo;
     private System.Windows.Forms.Button btnSave;
     private System.Windows.Forms.Button btnCancel;
 
