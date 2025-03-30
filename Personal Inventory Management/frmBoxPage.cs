@@ -45,9 +45,9 @@ namespace Personal_Inventory_Management {
                 MessageBox.Show("Please enter a name for the box"); // show a message box telling the user to give the box name
             }
         }
-        /* funciton to handle when the user clicks the add item button */
+        /* function to handle when the user clicks the add item button */
         private void btnAddItem_Click(object sender, EventArgs e) {
-            frmItemData itemData = new frmItemData(null); // create a new instance of the itemData form
+            frmItemData itemData = new frmItemData(null,null); // create a new instance of the itemData form
             DialogResult result = itemData.ShowDialog(); // show the form and save the result
             /* switch case to handle which button was pressedi in the form */
             switch (result) {
@@ -80,13 +80,23 @@ namespace Personal_Inventory_Management {
             int index = lstItems.SelectedIndex; // get the index of the selected item
             /* make sure its a valid index before doing anything */
             if (index != -1) {
-                frmItemData itemData = new frmItemData(newBox);
+                frmItemData itemData = new frmItemData(newBox,index);
                 DialogResult result = itemData.ShowDialog();
                 switch (result) {
                     case DialogResult.Cancel:
                         return;
                     case DialogResult.OK:
-                        var modifiedItem = new Tuple<string, bool>("newStringValue", false); // set the values for the updated item
+                        itemname = itemData.itemname; // save the itemname
+                        itemdescription = itemData.itemdesc; // save the itemdescription
+                        itemstatus = itemData.status; // save the outbox status
+                        TotalItem = itemData.itemname; // set the TotalItem to the name so the item description can be added to it
+                        if (string.IsNullOrEmpty(itemdescription)) {
+                            TotalItem = itemData.itemname + " | No description provided";
+                        }
+                        else {
+                            TotalItem += " | "  + itemdescription;
+                        }
+                        var modifiedItem = new Tuple<string, bool>(TotalItem, itemstatus); // set the values for the updated item
                         newBox.items[index] = modifiedItem; // add the updated item to the box list by replacing the old version
                         lstItems.Items[index] = modifiedItem; // add the updated item to the listbox dispaly by replacing the old version
                         break;
