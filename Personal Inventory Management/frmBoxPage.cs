@@ -15,7 +15,7 @@ namespace Personal_Inventory_Management {
         public frmBoxPage(Box box) {
             InitializeComponent();
             newBox = new Box(box.Name, new List<Tuple<string, bool>>(box.items)); // Create a copy of the passed box to work with in this form
-            sending = new Box("sending", new List<Tuple<string, bool>>(box.items));
+            sending = new Box(box.Name, new List<Tuple<string, bool>>(box.items));
             /* Make sure the box name isn't empty */
             if (!string.IsNullOrEmpty(box.Name)) {
                 txtName.Text = box.Name; // set the Name textbox text to the name of the box
@@ -94,6 +94,7 @@ namespace Personal_Inventory_Management {
                 sending.items.Add(updatedItem); // Add the entire tuple to the sending box
                 index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
                 moved = true;
+
             }
             else {
                 MessageBox.Show("Please select an item to send to the outbox"); // show a messagebox telling the user to select an item to send to the outbox
