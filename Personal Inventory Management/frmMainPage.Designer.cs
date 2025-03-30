@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             fLayMainDisplay = new FlowLayoutPanel();
-            textBox1 = new TextBox();
+            txtSearch = new TextBox();
             btnAdd = new Button();
             btnExit = new Button();
             lblSearchResult = new Label();
@@ -47,13 +47,13 @@
             fLayMainDisplay.Size = new Size(1209, 478);
             fLayMainDisplay.TabIndex = 3;
             // 
-            // textBox1
+            // txtSearch
             // 
-            textBox1.Location = new Point(995, 561);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(227, 27);
-            textBox1.TabIndex = 4;
+            txtSearch.Location = new Point(995, 561);
+            txtSearch.Margin = new Padding(3, 4, 3, 4);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(227, 27);
+            txtSearch.TabIndex = 4;
             // 
             // btnAdd
             // 
@@ -114,7 +114,7 @@
             Controls.Add(lblSearchResult);
             Controls.Add(btnExit);
             Controls.Add(btnAdd);
-            Controls.Add(textBox1);
+            Controls.Add(txtSearch);
             Controls.Add(fLayMainDisplay);
             Name = "frmMainPage";
             Text = "Personal Inventory Management System";
@@ -127,7 +127,7 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel fLayMainDisplay;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblSearchResult;

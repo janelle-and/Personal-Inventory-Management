@@ -9,6 +9,8 @@ namespace Personal_Inventory_Management {
         // creating a box to save initial items
         static Box TestBox;
 
+        static Box TestBox2;
+
         // creating list of items for the TestBox
         List<Tuple<string, bool>> TestBoxItems = new List<Tuple<string, bool>>()
             {
@@ -18,6 +20,15 @@ namespace Personal_Inventory_Management {
                 new Tuple<string, bool>("Item 4", false)
             };
 
+        // creating list of items for the TestBox2
+        List<Tuple<string, bool>> TestBoxItems2 = new List<Tuple<string, bool>>()
+            {
+                new Tuple<string, bool>("Item 5", false),
+                new Tuple<string, bool>("Item 6", false),
+                new Tuple<string, bool>("Item 7", false),
+                new Tuple<string, bool>("Item 8", false)
+            };
+
         String OutboxName = OutBox.Name;
         private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
         public frmMainPage()
@@ -25,11 +36,13 @@ namespace Personal_Inventory_Management {
             InitializeComponent(); // start and show the main form
 
             TestBox = new Box("Test Box", TestBoxItems); // initialize testBox in the constructor
+            TestBox2 = new Box("Test Box 2", TestBoxItems2); // initialize testBox2 in the constructor
 
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
 
             fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox, OutboxName)); // display the OutBox as it should always be there
             fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBox.Name)); // display the TestBox, so that we have an example box to work with
+            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox2, TestBox2.Name)); // display the TestBox2, so that we have an example box to work with
         }
         Box emptyBox = new Box("", new List<Tuple<string, bool>>()); // create an empty box to use with the add button
         private Box _currentBox; // Private backing field for the CurrentBox property
@@ -216,21 +229,26 @@ namespace Personal_Inventory_Management {
             this.Close(); // close the main form when exit button is clicked
         }
 
-        private void btnSearch_Click(object sender, EventArgs e) { }
-        //{
-        //    // searches the boxes for the item in the search box
-        //    string searchItem = txtSearch.Text; // get the item to search for   
-        //    foreach (var box in _boxPanelsDict.Values)
-        //    {
-        //        foreach (var item in box.items)
-        //        {
-        //            if (item.Item1 == searchItem)
-        //            {
-        //                ("Item found in " + box.Name); // puts the box name in the lblSearchResult label
-        //                return; // return from the function
-        //            }
-        //        }
-        //    }
-        //}
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            // searches the boxes for the item in the search box, if the search has a similar name to an item in the box, it will display the box name
+            string searchItem = txtSearch.Text; // get the search text
+            foreach (var box in _boxPanelsDict.Values) // loop through all the boxes
+            {
+                foreach (var item in box.items) // loop through all the items in the box
+                {
+                    if (item.Item1.Contains(searchItem) ) // check if the item name contains the search text
+                    {
+                        lblResult.Text = box.Name; // show a messagebox with the box name
+                        return; // return from the function
+                    }
+                    else
+                    {
+                        lblResult.Text = "Item not found"; // show a messagebox with the box name
+                    }
+                }
+            }
+        }
     }
+
 }
