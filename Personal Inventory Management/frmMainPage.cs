@@ -1,10 +1,12 @@
 using Microsoft.VisualBasic.Devices;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace Personal_Inventory_Management {
     public partial class frmMainPage : Form
     {
         /* initialize and display the OutBox on program start */
-        static Box OutBox = new Box("OutBox", new List<Tuple<string, bool>>());
+        static Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?>>());
+        List<Box> boxes = new List<Box>(); // initialize a list of boxes
 
         // creating a box to save initial items
         static Box TestBox;
@@ -12,21 +14,21 @@ namespace Personal_Inventory_Management {
         static Box TestBox2;
 
         // creating list of items for the TestBox
-        List<Tuple<string, bool>> TestBoxItems = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool, string?>> TestBoxItems = new List<Tuple<string, bool, string?>>()
             {
-                new Tuple<string, bool>("Item 1", false),
-                new Tuple<string, bool>("Item 2", false),
-                new Tuple<string, bool>("Item 3", false),
-                new Tuple<string, bool>("Item 4", false)
+                new Tuple<string, bool, string?>("Item 1", false, "TestBox1"),
+                new Tuple<string, bool, string?>("Item 2", false, "TestBox1"),
+                new Tuple<string, bool, string?>("Item 3", false, "TestBox1"),
+                new Tuple<string, bool, string?>("Item 4", false, "TestBox1")
             };
 
         // creating list of items for the TestBox2
-        List<Tuple<string, bool>> TestBoxItems2 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool, string?>> TestBoxItems2 = new List<Tuple<string, bool, string?>>()
             {
-                new Tuple<string, bool>("Item 5", false),
-                new Tuple<string, bool>("Item 6", false),
-                new Tuple<string, bool>("Item 7", false),
-                new Tuple<string, bool>("Item 8", false)
+                new Tuple<string, bool, string?>("Item 5", false, "TestBox2"),
+                new Tuple<string, bool, string?>("Item 6", false, "TestBox2"),
+                new Tuple<string, bool, string?>("Item 7", false, "TestBox2"),
+                new Tuple<string, bool, string?>("Item 8", false, "TestBox2")
             };
 
         String OutboxName = OutBox.Name;
@@ -44,7 +46,7 @@ namespace Personal_Inventory_Management {
             fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBox.Name)); // display the TestBox, so that we have an example box to work with
             fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox2, TestBox2.Name)); // display the TestBox2, so that we have an example box to work with
         }
-        Box emptyBox = new Box("", new List<Tuple<string, bool>>()); // create an empty box to use with the add button
+        Box emptyBox = new Box("", new List<Tuple<string, bool, string?>>()); // create an empty box to use with the add button
         private Box _currentBox; // Private backing field for the CurrentBox property
         /* Public property for accessing and setting the _currentBox field */
         public Box CurrentBox
@@ -140,7 +142,7 @@ namespace Personal_Inventory_Management {
             /* get the box panel user clicked on from the available panels */
             foreach (Control c in panel.Controls)
             {
-                c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the Box_Click function
+                c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the OutBox_Click function
             }
             return panel; // return the panel so the panel can be displayed
         }
@@ -207,7 +209,7 @@ namespace Personal_Inventory_Management {
                         if (existingItem != null)
                         {
                             var index = OutBox.items.IndexOf(existingItem); // get the index of the item
-                            OutBox.items[index] = new Tuple<string, bool>(existingItem.Item1, true); // change the tuple to have a true value
+                            OutBox.items[index] = new Tuple<string, bool, string?>(existingItem.Item1, true, null); // change the tuple to have a true value
                         }
                         else
                         {
@@ -221,6 +223,26 @@ namespace Personal_Inventory_Management {
         {
             frmOutBox frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
             DialogResult result = frmOutBox.ShowDialog(); // Get the result of the dialog
+            if (result == DialogResult.OK)
+            {
+                OutBox = frmOutBox.OutBox; // Update the OutBox with the new items
+                //checks if the return box has any items in it
+                if (frmOutBox.returnBox.items.Count > 0)
+                {
+                    var returnedItems = frmOutBox.returnBox.items; // get the items from the return box
+                    foreach (var item in returnedItems)
+                    {
+                        foreach (Box box in boxes) // loop through all the boxes
+                        {
+                            if (box.Name == item.Item3) // check if the box name matches the item name
+                            {
+                                box.items.Add(new Tuple<string, bool, string?>(item.Item1, false, item.Item3)); // add the item to the box
+                                box.items.Remove(item); // remove the item from the return box
+                            }
+                        }
+                    }
+                }
+            }
 
         }
         /* function to handle when the user clicks the exit button */
