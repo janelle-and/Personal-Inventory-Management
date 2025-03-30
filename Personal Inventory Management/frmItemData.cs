@@ -16,6 +16,7 @@ public partial class frmItemData : Form {
         if (index.HasValue) {
             validIndex = index.Value;
         }
+
         lblStatusState.Text = "No";
         handleBox(box, validIndex);
     }
