@@ -11,20 +11,22 @@ public partial class frmItemData : Form {
     // Declare a private field to store the box object
     private Box? box;
 
-    public frmItemData(Box? box, int? index)
-    {
+    public frmItemData(Box? box, int? index) {
         InitializeComponent();
         this.box = box; // Store the box in the class-level variable
         int validIndex = 0; // store the index of the item in the passed box
+        if (index.HasValue) {
+            validIndex = index.Value;
+        }
+        handleBox(box, validIndex);
+    }
+    private void handleBox(Box passed, int indexed) {
         /* set the text fields and radio button selection to the values in the item that the user passed from the calling form if the box not null */
         if (box != null) {
-            if (index.HasValue) {
-                validIndex = index.Value;
-            }
-            partone = box.items[validIndex].Item1;  // Get the first part of the item list which is the string value for name and description
+            partone = box.items[indexed].Item1;  // Get the first part of the item list which is the string value for name and description
             splits = partone.Split('|');   // Split the string by the '|' character
             parttwo = splits[1].Trim();  // Take the second part (after the '|') and trim spaces
-            passedstatus = box.items[validIndex].Item2;  // Get the status passed from the calling form
+            passedstatus = box.items[indexed].Item2;  // Get the status passed from the calling form
             /* Set the textboxes and radio buttons based on the split result */
             txtItemName.Text = splits[0].Trim();  // Set item name as the first part of the split
             txtItemDescription.Text = parttwo;  // Set description from the second part of the split
