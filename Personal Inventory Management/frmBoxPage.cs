@@ -65,8 +65,9 @@ namespace Personal_Inventory_Management {
                         newBox.items.Add(new Tuple<string, bool>(TotalItem, false)); // currently hard coded but this adds the item to the box item list
                         lstItems.Items.Add(newBox.items.Last()); // display the newly added item in the listbox display
                     }
-                    else {
-                        TotalItem += " | "  + itemdescription;
+                    else
+                    {
+                        TotalItem += " | " + itemdescription;
                         newBox.items.Add(new Tuple<string, bool>(TotalItem, false));
                         lstItems.Items.Add(newBox.items.Last());
                     }
