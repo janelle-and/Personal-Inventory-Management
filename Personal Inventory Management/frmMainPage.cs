@@ -142,7 +142,7 @@ namespace Personal_Inventory_Management {
             /* get the box panel user clicked on from the available panels */
             foreach (Control c in panel.Controls)
             {
-                c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the Box_Click function
+                c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the OutBox_Click function
             }
             return panel; // return the panel so the panel can be displayed
         }
@@ -226,21 +226,18 @@ namespace Personal_Inventory_Management {
             if (result == DialogResult.OK)
             {
                 OutBox = frmOutBox.OutBox; // Update the OutBox with the new items
-
+                //checks if the return box has any items in it
                 if (frmOutBox.returnBox.items.Count > 0)
                 {
-                    var returnedItems = frmOutBox.returnBox.items;
+                    var returnedItems = frmOutBox.returnBox.items; // get the items from the return box
                     foreach (var item in returnedItems)
                     {
-
-                        foreach (Box box in boxes)
+                        foreach (Box box in boxes) // loop through all the boxes
                         {
-                            if (box.Name == item.Item3)
+                            if (box.Name == item.Item3) // check if the box name matches the item name
                             {
-                                box.items.Remove(item);
-                                box.items.Add(new Tuple<string, bool, string?>(item.Item1, false, item.Item3));
-                                MessageBox.Show("Item returned to box: " + box.Name);
-
+                                box.items.Add(new Tuple<string, bool, string?>(item.Item1, false, item.Item3)); // add the item to the box
+                                box.items.Remove(item); // remove the item from the return box
                             }
                         }
                     }
