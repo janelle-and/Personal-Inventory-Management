@@ -5,7 +5,7 @@ public partial class frmItemData : Form
     public string itemname = "";
     public string itemdesc = "";
     public bool status = false;
-    public frmItemData() {
+    public frmItemData(Box? box) {
         InitializeComponent();
     }
     /* function to handle when the user clicks the save button */

@@ -12,6 +12,11 @@ namespace Personal_Inventory_Management {
         public Box newBox { get;  set; } // initialize a new box object
         public Box sending { get ; set; } // initialize the box for sending things to the outbox
         public bool moved; // flag for checking if the item has been moved
+        /* variables to store the data gotten from the itemData form */
+        string itemname = "";
+        string itemdescription = "";
+        bool itemstatus = false;
+        string TotalItem = "";
         public frmBoxPage(Box box) {
             InitializeComponent();
             newBox = new Box(box.Name, new List<Tuple<string, bool>>(box.items)); // Create a copy of the passed box to work with in this form
@@ -42,12 +47,7 @@ namespace Personal_Inventory_Management {
         }
         /* funciton to handle when the user clicks the add item button */
         private void btnAddItem_Click(object sender, EventArgs e) {
-            /* variables to store the data gotten from the itemData form */
-            string itemname = "";
-            string itemdescription = "";
-            bool itemstatus = false;
-            string TotalItem = "";
-            frmItemData itemData = new frmItemData(); // create a new instance of the itemData form
+            frmItemData itemData = new frmItemData(null); // create a new instance of the itemData form
             DialogResult result = itemData.ShowDialog(); // show the form and save the result
             /* switch case to handle which button was pressedi in the form */
             switch (result) {
@@ -80,7 +80,7 @@ namespace Personal_Inventory_Management {
             int index = lstItems.SelectedIndex; // get the index of the selected item
             /* make sure its a valid index before doing anything */
             if (index != -1) {
-                frmItemData itemData = new frmItemData();
+                frmItemData itemData = new frmItemData(newBox);
                 DialogResult result = itemData.ShowDialog();
                 switch (result) {
                     case DialogResult.Cancel:
