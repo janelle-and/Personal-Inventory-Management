@@ -16,8 +16,6 @@ namespace Personal_Inventory_Management {
             {
                 new Tuple<string, bool>("Item 1", false),
                 new Tuple<string, bool>("Item 2", false),
-                new Tuple<string, bool>("Item 3", false),
-                new Tuple<string, bool>("Item 4", false)
             };
 
         // creating list of items for the TestBox2
@@ -249,7 +247,6 @@ namespace Personal_Inventory_Management {
                             lblResult.Text = box.Name; // show a messagebox with the box name
                             return; // return from the function
                         }
-
                         else
                         {
                             lblResult.Text = "Item not found"; // show a messagebox with the box name
