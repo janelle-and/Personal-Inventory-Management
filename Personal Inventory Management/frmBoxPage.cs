@@ -11,7 +11,7 @@ namespace Personal_Inventory_Management {
     public partial class frmBoxPage : Form {
         public Box newBox { get;  set; } // initialize a new box object
         public Box sending { get ; set; } // initialize the box for sending things to the outbox
-        public bool moved;
+        public bool moved; // flag for checking if the item has been moved
         public frmBoxPage(Box box) {
             InitializeComponent();
             newBox = new Box(box.Name, new List<Tuple<string, bool>>(box.items)); // Create a copy of the passed box to work with in this form
@@ -42,10 +42,33 @@ namespace Personal_Inventory_Management {
         }
         /* funciton to handle when the user clicks the add item button */
         private void btnAddItem_Click(object sender, EventArgs e) {
+            string itemname = "";
+            string itemdescription = "";
+            bool itemstatus = false;
+            string TotalItem = "";
             frmItemData itemData = new frmItemData();
-            itemData.ShowDialog();
-            newBox.items.Add(new Tuple<string, bool>("Winter Boots | My favourite winter boots :)", false)); // currently hard coded but this adds the item to the box item list
-            lstItems.Items.Add(newBox.items[0]); // display the newly added item in the listbox display
+            DialogResult result = itemData.ShowDialog();
+            switch (result) {
+                case DialogResult.Cancel:
+                    return;
+                case DialogResult.OK:
+                    itemname = itemData.itemname;
+                    itemdescription = itemData.itemdesc;
+                    itemstatus = itemData.status;
+                    TotalItem = itemData.itemname;
+                    if (string.IsNullOrEmpty(itemdescription)) {
+                        TotalItem = itemData.itemname + " | No description provided";
+                        newBox.items.Add(new Tuple<string, bool>(TotalItem, itemstatus)); // currently hard coded but this adds the item to the box item list
+                        lstItems.Items.Add(newBox.items.Last()); // display the newly added item in the listbox display
+                    }
+                    else {
+                        TotalItem += " | "  + itemdescription;
+                        newBox.items.Add(new Tuple<string, bool>(TotalItem, itemstatus));
+                        lstItems.Items.Add(newBox.items.Last());
+                    }
+                    /* reset the variables after the item is added */
+                    break;
+            }
         }
         /* function to handle when the user clicks the update item button */
         private void btnUpdateItem_Click(object sender, EventArgs e) {
@@ -53,10 +76,16 @@ namespace Personal_Inventory_Management {
             /* make sure its a valid index before doing anything */
             if (index != -1) {
                 frmItemData itemData = new frmItemData();
-                itemData.ShowDialog();
-                var modifiedItem = new Tuple<string, bool>("newStringValue", false); // set the values for the updated item
-                newBox.items[index] = modifiedItem; // add the updated item to the box list by replacing the old version
-                lstItems.Items[index] = modifiedItem; // add the updated item to the listbox dispaly by replacing the old version
+                DialogResult result = itemData.ShowDialog();
+                switch (result) {
+                    case DialogResult.Cancel:
+                        return;
+                    case DialogResult.OK:
+                        var modifiedItem = new Tuple<string, bool>("newStringValue", false); // set the values for the updated item
+                        newBox.items[index] = modifiedItem; // add the updated item to the box list by replacing the old version
+                        lstItems.Items[index] = modifiedItem; // add the updated item to the listbox dispaly by replacing the old version
+                        break;
+                }
             }
             else {
                 MessageBox.Show("Please select an item to update"); // show a messagebox telling the user to select an item to update
