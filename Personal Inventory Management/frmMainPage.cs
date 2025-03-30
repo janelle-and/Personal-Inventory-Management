@@ -14,22 +14,50 @@ namespace Personal_Inventory_Management {
         static Box TestBox2;
 
         // creating list of items for the TestBox
-        List<Tuple<string, bool, string?>> TestBoxItems = new List<Tuple<string, bool, string?>>()
-            {
-                new Tuple<string, bool, string?>("Item 1", false, "TestBox1"),
-                new Tuple<string, bool, string?>("Item 2", false, "TestBox1"),
-                new Tuple<string, bool, string?>("Item 3", false, "TestBox1"),
-                new Tuple<string, bool, string?>("Item 4", false, "TestBox1")
-            };
+        List<Tuple<string, bool>> Box1Items1 = new List<Tuple<string, bool>>()
+        {
+             new Tuple<string, bool>("Item 1 | Something Something", false)
 
-        // creating list of items for the TestBox2
-        List<Tuple<string, bool, string?>> TestBoxItems2 = new List<Tuple<string, bool, string?>>()
-            {
-                new Tuple<string, bool, string?>("Item 5", false, "TestBox2"),
-                new Tuple<string, bool, string?>("Item 6", false, "TestBox2"),
-                new Tuple<string, bool, string?>("Item 7", false, "TestBox2"),
-                new Tuple<string, bool, string?>("Item 8", false, "TestBox2")
-            };
+        };
+        List<Tuple<string, bool>> Box1Items2 = new List<Tuple<string, bool>>()
+        {
+                new Tuple<string, bool>("Item 2 | Something Something", false),
+        };
+        List<Tuple<string, bool>> Box1Items3 = new List<Tuple<string, bool>>()
+        {
+                new Tuple<string, bool>("Item 3 | Something Something", false),
+        };
+        List<Tuple<string, bool>> Box1Items4 = new List<Tuple<string, bool>>()
+        {
+                new Tuple<string, bool>("Item 4 | Something Something", false),
+        };
+
+        //// creating list of items for the TestBox2
+        //List<Tuple<string, bool>> TestBoxItems2 = new List<Tuple<string, bool>>()
+        //    {
+        //        new Tuple<string, bool>("Item 5", false),
+        //        new Tuple<string, bool>("Item 6", false),
+        //        new Tuple<string, bool>("Item 7", false),
+        //        new Tuple<string, bool>("Item 8", false)
+        //    };
+
+        List<Tuple<string, bool>> Box2Items5 = new List<Tuple<string, bool>>()
+        {
+             new Tuple<string, bool>("Item 5 | Something Something", false)
+
+        };
+        List<Tuple<string, bool>> Box2Items6 = new List<Tuple<string, bool>>()
+        {
+                new Tuple<string, bool>("Item 6 | Something Something", false),
+        };
+        List<Tuple<string, bool>> Box2Items7 = new List<Tuple<string, bool>>()
+        {
+                new Tuple<string, bool>("Item 7 | Something Something", false),
+        };
+        List<Tuple<string, bool>> Box2Items8 = new List<Tuple<string, bool>>()
+        {
+                new Tuple<string, bool>("Item 8 | Something Something", false),
+        };
 
         String OutboxName = OutBox.Name;
         private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
@@ -37,8 +65,18 @@ namespace Personal_Inventory_Management {
         {
             InitializeComponent(); // start and show the main form
 
-            TestBox = new Box("Box 1", TestBoxItems); // initialize testBox in the constructor
-            TestBox2 = new Box("Box 2", TestBoxItems2); // initialize testBox2 in the constructor
+            TestBox = new Box("Box 1", Box1Items1); // initialize testBox in the constructor
+            TestBox.items.AddRange(Box1Items2);//adds list to the box
+            TestBox.items.AddRange(Box1Items3);//adds list to the box
+            TestBox.items.AddRange(Box1Items4);//adds list to the box
+
+
+
+
+            TestBox2 = new Box("Box 2", Box2Items5); // initialize testBox2 in the constructor
+            TestBox2.items.AddRange(Box2Items6);//adds list to the box
+            TestBox2.items.AddRange(Box2Items7);//adds list to the box
+            TestBox2.items.AddRange(Box2Items8);//adds list to the box
 
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
 
@@ -259,23 +297,23 @@ namespace Personal_Inventory_Management {
             {
                 foreach (var item in box.items) // loop through all the items in the box
                 {
-                    if (item.Item1.Contains(searchItem) ) // check if the item name contains the search text
+                    if (item.Item1.Contains(searchItem)) // check if the item name contains the search text
                     {
                         lblResult.Text = box.Name; // show a messagebox with the box name
+                                                   //return; // return from the function
+
+                        foreach (var item2 in box.items) // loop through all the items in the box
+                        {
+                            if (item.Item1.Contains(searchItem)) // check if the item name contains the search text
+                            {
+                                lblResult.Text += box.Name; // show a messagebox with the box name
+                            }
+                        }
                         return; // return from the function
                     }
-                    foreach (var item2 in box.items) // loop through all the items in the box
+                    else
                     {
-                        if (item.Item1.Contains(searchItem)) // check if the item name contains the search text
-                        { 
-                            lblResult.Text = box.Name; // show a messagebox with the box name
-                            return; // return from the function
-                        }
-
-                        else
-                        {
-                            lblResult.Text = "Item not found"; // show a messagebox with the box name
-                        }
+                        lblResult.Text = "Item not found"; // show a messagebox with the box name
                     }
                 }
             }
