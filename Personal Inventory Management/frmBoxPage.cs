@@ -42,20 +42,25 @@ namespace Personal_Inventory_Management {
         }
         /* funciton to handle when the user clicks the add item button */
         private void btnAddItem_Click(object sender, EventArgs e) {
+            /* variables to store the data gotten from the itemData form */
             string itemname = "";
             string itemdescription = "";
             bool itemstatus = false;
             string TotalItem = "";
-            frmItemData itemData = new frmItemData();
-            DialogResult result = itemData.ShowDialog();
+            frmItemData itemData = new frmItemData(); // create a new instance of the itemData form
+            DialogResult result = itemData.ShowDialog(); // show the form and save the result
+            /* switch case to handle which button was pressedi in the form */
             switch (result) {
+                /* cancel button was pressed so do nothing */
                 case DialogResult.Cancel:
                     return;
+                /* save button was pressed so handle that */
                 case DialogResult.OK:
-                    itemname = itemData.itemname;
-                    itemdescription = itemData.itemdesc;
-                    itemstatus = itemData.status;
-                    TotalItem = itemData.itemname;
+                    itemname = itemData.itemname; // save the itemname
+                    itemdescription = itemData.itemdesc; // save the itemdescription
+                    itemstatus = itemData.status; // save the outbox status
+                    TotalItem = itemData.itemname; // set the TotalItem to the name so the item description can be added to it
+                    /* check if the user left the item description empty */
                     if (string.IsNullOrEmpty(itemdescription)) {
                         TotalItem = itemData.itemname + " | No description provided";
                         newBox.items.Add(new Tuple<string, bool>(TotalItem, itemstatus)); // currently hard coded but this adds the item to the box item list
