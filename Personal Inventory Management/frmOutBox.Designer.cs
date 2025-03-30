@@ -40,21 +40,22 @@
             lstOutItems.FormattingEnabled = true;
             lstOutItems.Location = new Point(47, 65);
             lstOutItems.Name = "lstOutItems";
-            lstOutItems.Size = new Size(239, 304);
+            lstOutItems.Size = new Size(562, 304);
             lstOutItems.TabIndex = 0;
             // 
             // btnReturnItem
             // 
-            btnReturnItem.Location = new Point(342, 155);
+            btnReturnItem.Location = new Point(665, 165);
             btnReturnItem.Name = "btnReturnItem";
             btnReturnItem.Size = new Size(94, 29);
             btnReturnItem.TabIndex = 1;
             btnReturnItem.Text = "&Return Item";
             btnReturnItem.UseVisualStyleBackColor = true;
+            btnReturnItem.Click += btnReturnItem_Click;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(342, 269);
+            btnSave.Location = new Point(665, 264);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 29);
             btnSave.TabIndex = 2;
@@ -64,7 +65,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(342, 330);
+            btnCancel.Location = new Point(665, 340);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(94, 29);
             btnCancel.TabIndex = 3;
@@ -85,7 +86,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(499, 450);
+            ClientSize = new Size(812, 450);
             Controls.Add(label1);
             Controls.Add(btnCancel);
             Controls.Add(btnSave);
