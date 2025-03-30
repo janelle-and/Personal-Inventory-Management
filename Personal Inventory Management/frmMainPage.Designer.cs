@@ -102,7 +102,6 @@
             btnSearch.TabIndex = 10;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
             // 
             // frmMainPage
             // 
