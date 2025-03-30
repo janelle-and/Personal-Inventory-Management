@@ -35,8 +35,8 @@ namespace Personal_Inventory_Management {
         {
             InitializeComponent(); // start and show the main form
 
-            TestBox = new Box("Test Box", TestBoxItems); // initialize testBox in the constructor
-            TestBox2 = new Box("Test Box 2", TestBoxItems2); // initialize testBox2 in the constructor
+            TestBox = new Box("Box 1", TestBoxItems); // initialize testBox in the constructor
+            TestBox2 = new Box("Box 2", TestBoxItems2); // initialize testBox2 in the constructor
 
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
 
@@ -242,13 +242,22 @@ namespace Personal_Inventory_Management {
                         lblResult.Text = box.Name; // show a messagebox with the box name
                         return; // return from the function
                     }
-                    else
+                    foreach (var item2 in box.items) // loop through all the items in the box
                     {
-                        lblResult.Text = "Item not found"; // show a messagebox with the box name
+                        if (item.Item1.Contains(searchItem)) // check if the item name contains the search text
+                        { 
+                            lblResult.Text = box.Name; // show a messagebox with the box name
+                            return; // return from the function
+                        }
+
+                        else
+                        {
+                            lblResult.Text = "Item not found"; // show a messagebox with the box name
+                        }
                     }
                 }
             }
         }
-    }
+    } 
 
 }
