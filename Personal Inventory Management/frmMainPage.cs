@@ -5,24 +5,16 @@ namespace Personal_Inventory_Management {
         /* initialize and display the OutBox on program start */
         static Box OutBox = new Box("OutBox", new List<Tuple<string, bool>>());
 
-        // creating a box sto save initial items
-        static Box testBox = new Box("Test Box", new List<Tuple<string, bool>>());
-
         // creating list of items for the TestBox
         List<Tuple<string, bool>> TestBoxItems = new List<Tuple<string, bool>>()
         {
-
             new Tuple<string, bool>("Item 1", false),
             new Tuple<string, bool>("Item 2", false),
-
         };
         String OutboxName = OutBox.Name;
         private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
         public frmMainPage() {
             InitializeComponent(); // start and show the main form
-            _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
-            fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox,OutboxName)); // display the OutBox as it should always be there
-            fLayMainDisplay.Controls.Add(CreateBoxControl(testBox, testBox.Name)); // display the TestBox
 
         }
         Box emptyBox = new Box("", new List<Tuple<string, bool>>()); // create an empty box to use with the add button
