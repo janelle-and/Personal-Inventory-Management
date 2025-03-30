@@ -51,6 +51,7 @@
             // 
             txtSearch.Location = new Point(995, 561);
             txtSearch.Margin = new Padding(3, 4, 3, 4);
+            txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(227, 27);
             txtSearch.TabIndex = 4;
@@ -88,9 +89,9 @@
             // 
             // lblResult
             // 
-            lblResult.Location = new Point(995, 631);
+            lblResult.Location = new Point(995, 621);
             lblResult.Name = "lblResult";
-            lblResult.Size = new Size(227, 31);
+            lblResult.Size = new Size(227, 73);
             lblResult.TabIndex = 9;
             lblResult.Text = "This is some placeholder text";
             // 
