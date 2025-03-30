@@ -15,7 +15,7 @@ namespace Personal_Inventory_Management {
         public frmBoxPage(Box box) {
             InitializeComponent();
             newBox = new Box(box.Name, new List<Tuple<string, bool>>(box.items)); // Create a copy of the passed box to work with in this form
-            sending = new Box("sending", new List<Tuple<string, bool>>(box.items));
+            sending = new Box(box.Name, new List<Tuple<string, bool>>(box.items));
             /* Make sure the box name isn't empty */
             if (!string.IsNullOrEmpty(box.Name)) {
                 txtName.Text = box.Name; // set the Name textbox text to the name of the box
@@ -42,20 +42,25 @@ namespace Personal_Inventory_Management {
         }
         /* funciton to handle when the user clicks the add item button */
         private void btnAddItem_Click(object sender, EventArgs e) {
+            /* variables to store the data gotten from the itemData form */
             string itemname = "";
             string itemdescription = "";
             bool itemstatus = false;
             string TotalItem = "";
-            frmItemData itemData = new frmItemData();
-            DialogResult result = itemData.ShowDialog();
+            frmItemData itemData = new frmItemData(); // create a new instance of the itemData form
+            DialogResult result = itemData.ShowDialog(); // show the form and save the result
+            /* switch case to handle which button was pressedi in the form */
             switch (result) {
+                /* cancel button was pressed so do nothing */
                 case DialogResult.Cancel:
                     return;
+                /* save button was pressed so handle that */
                 case DialogResult.OK:
-                    itemname = itemData.itemname;
-                    itemdescription = itemData.itemdesc;
-                    itemstatus = itemData.status;
-                    TotalItem = itemData.itemname;
+                    itemname = itemData.itemname; // save the itemname
+                    itemdescription = itemData.itemdesc; // save the itemdescription
+                    itemstatus = itemData.status; // save the outbox status
+                    TotalItem = itemData.itemname; // set the TotalItem to the name so the item description can be added to it
+                    /* check if the user left the item description empty */
                     if (string.IsNullOrEmpty(itemdescription)) {
                         TotalItem = itemData.itemname + " | No description provided";
                         newBox.items.Add(new Tuple<string, bool>(TotalItem, itemstatus)); // currently hard coded but this adds the item to the box item list
@@ -123,6 +128,7 @@ namespace Personal_Inventory_Management {
                 sending.items.Add(updatedItem); // Add the entire tuple to the sending box
                 index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
                 moved = true;
+
             }
             else {
                 MessageBox.Show("Please select an item to send to the outbox"); // show a messagebox telling the user to select an item to send to the outbox

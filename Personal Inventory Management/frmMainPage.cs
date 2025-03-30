@@ -9,7 +9,7 @@ namespace Personal_Inventory_Management {
         public frmMainPage() {
             InitializeComponent(); // start and show the main form
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
-            fLayMainDisplay.Controls.Add(CreateBoxControl(OutBox,OutboxName)); // display the OutBox as it should always be there
+            fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox,OutboxName)); // display the OutBox as it should always be there
         }
         Box emptyBox = new Box("", new List<Tuple<string, bool>>()); // create an empty box to use with the add button
         private Box _currentBox; // Private backing field for the CurrentBox property
@@ -68,6 +68,41 @@ namespace Personal_Inventory_Management {
             }
             return panel; // return the panel so the panel can be displayed
         }
+        private Control CreateOutBoxControl(Box box,String boxName)
+        {
+            Panel panel = new Panel();
+            panel.Name = box.Name;
+            panel.Size = new Size(100, 150);
+            panel.BackColor = Color.White;
+            /* setup the label for the box panel */
+            Label boxTitle = new Label();
+            boxTitle.Text = boxName;
+            boxTitle.Dock = DockStyle.Bottom; // set the label to show at the bottom of the panel
+            boxTitle.TextAlign = ContentAlignment.MiddleCenter;
+            boxTitle.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            panel.Controls.Add(boxTitle); // add the label to the box panel
+            /* setup the picture for the box panel */
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Name = "pictureBox";
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // make the image scale with the size of the panel
+            pictureBox.Size = new Size(100, 100);
+            pictureBox.Location = new Point(0, 0); // make the panels always spawn from top right
+            string path = "../../../project_Box_2.jpeg"; // get the path of the picture used in the panel
+            /* make sure the picture exists, and if it does use it */
+            if (File.Exists(path))
+            {
+                pictureBox.Image = Image.FromFile(path);
+            }
+            _boxPanelsDict[panel] = box; // get the box object for the new panel
+            panel.Controls.Add(pictureBox); // add the picture to the panel
+            panel.Click += new EventHandler(OutBox_Click); // make the box panel clickable
+            /* get the box panel user clicked on from the available panels */
+            foreach (Control c in panel.Controls)
+            {
+                c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the Box_Click function
+            }
+            return panel; // return the panel so the panel can be displayed
+        }
         /* function to handle when the user clicks on a box panel */
         private void Box_Click(object? sender, EventArgs e) {
             /* make sure the user clicked on the actual panel */
@@ -106,7 +141,7 @@ namespace Personal_Inventory_Management {
                     break;
             }
             /* user added item to outbox */
-            if(boxPage.moved == true){
+            if (boxPage.moved == true){
                 /* Only update if changes were made */
                 if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items)) {
                     _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary
@@ -128,6 +163,11 @@ namespace Personal_Inventory_Management {
                     }
                 }
             }
+        }
+        private void OutBox_Click(object? sender, EventArgs e) {
+            frmOutBox frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
+            DialogResult result = frmOutBox.ShowDialog(); // Get the result of the dialog
+            
         }
         /* function to handle when the user clicks the exit button */
         private void btnExit_Click(object sender, EventArgs e) {
