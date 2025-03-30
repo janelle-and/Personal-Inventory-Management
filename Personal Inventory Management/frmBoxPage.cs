@@ -19,8 +19,8 @@ namespace Personal_Inventory_Management {
         string TotalItem = "";
         public frmBoxPage(Box box) {
             InitializeComponent();
-            newBox = new Box(box.Name, new List<Tuple<string, bool>>(box.items)); // Create a copy of the passed box to work with in this form
-            sending = new Box(box.Name, new List<Tuple<string, bool>>(box.items));
+            newBox = new Box(box.Name, new List<Tuple<string, bool,string?>>(box.items)); // Create a copy of the passed box to work with in this form
+            sending = new Box(box.Name, new List<Tuple<string, bool,string?>>(box.items));
             /* Make sure the box name isn't empty */
             if (!string.IsNullOrEmpty(box.Name)) {
                 txtName.Text = box.Name; // set the Name textbox text to the name of the box
@@ -62,13 +62,13 @@ namespace Personal_Inventory_Management {
                     /* check if the user left the item description empty */
                     if (string.IsNullOrEmpty(itemdescription)) {
                         TotalItem = itemData.itemname + " | No description provided";
-                        newBox.items.Add(new Tuple<string, bool>(TotalItem, false)); // currently hard coded but this adds the item to the box item list
+                        newBox.items.Add(new Tuple<string, bool,string?>(TotalItem, false,null)); // currently hard coded but this adds the item to the box item list
                         lstItems.Items.Add(newBox.items.Last()); // display the newly added item in the listbox display
                     }
                     else
                     {
                         TotalItem += " | " + itemdescription;
-                        newBox.items.Add(new Tuple<string, bool>(TotalItem, false));
+                        newBox.items.Add(new Tuple<string, bool, string?>(TotalItem, false,null));
                         lstItems.Items.Add(newBox.items.Last());
                     }
                     /* reset the variables after the item is added */
@@ -95,7 +95,7 @@ namespace Personal_Inventory_Management {
                         else {
                             TotalItem += " | "  + itemdescription;
                         }
-                        var modifiedItem = new Tuple<string, bool>(TotalItem, false); // set the values for the updated item
+                        var modifiedItem = new Tuple<string, bool,string?>(TotalItem, false,null); // set the values for the updated item
                         newBox.items[index] = modifiedItem; // add the updated item to the box list by replacing the old version
                         lstItems.Items[index] = modifiedItem; // add the updated item to the listbox dispaly by replacing the old version
                         break;
@@ -130,7 +130,7 @@ namespace Personal_Inventory_Management {
             int index = lstItems.SelectedIndex; // Get the index of the selected item
             if (index != -1) {
                 var selectedItem = newBox.items[index]; // store the selected item
-                var updatedItem = new Tuple<string, bool>(selectedItem.Item1, true); // Create a new tuple with the same string value and the updated out status
+                var updatedItem = new Tuple<string, bool,string?>(selectedItem.Item1, true,newBox.Name); // Create a new tuple with the same string value and the updated out status
                 newBox.items[index] = updatedItem; // Replace the old tuple in the list with the new one
                 lstItems.Items.RemoveAt(index); // remove the outdated item
                 lstItems.Items.Add(newBox.items[index]); // add the updated item
