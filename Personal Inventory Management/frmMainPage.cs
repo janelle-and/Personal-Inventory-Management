@@ -89,11 +89,14 @@ namespace Personal_Inventory_Management {
             switch (result) {
                 /* user clicked save */
                 case DialogResult.OK:
-                    /* Only update if changes were made */
+                    /* only update the panel and box if changes were made */
                     if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items)) {
-                        _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary
-                        fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the outdated panel
-                        fLayMainDisplay.Controls.Add(CreateBoxControl(boxPage.newBox, boxPage.newBox.Name)); // Add updated box panel
+                        _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary at the selected index
+                        Label boxTitle = clickedPanel.Controls.OfType<Label>().FirstOrDefault(); // Update the label for the panel (only matters if name was changed)
+                        /* only change box name if the value is not null */
+                        if (boxTitle != null) {
+                            boxTitle.Text = boxPage.newBox.Name; // set the box name
+                        }
                     }
                     break;
                 /* user clicked delele box */
@@ -101,13 +104,29 @@ namespace Personal_Inventory_Management {
                     _boxPanelsDict.Remove(clickedPanel); // Remove the box reference from the dictionary
                     fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the panel from the layout
                     break;
-                /* user added item to outbox */
-                case DialogResult.Ignore:
-                    /* If the user moved an item to the OutBox, add it to OutBox items */
-                    if (boxPage.sending != null && boxPage.sending.items.Count > 0) {
-                        OutBox.items.Add(boxPage.sending.items[0]);
+            }
+            /* user added item to outbox */
+            if(boxPage.moved == true){
+                /* Only update if changes were made */
+                if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items)) {
+                    _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary
+                    fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the outdated panel
+                    fLayMainDisplay.Controls.Add(CreateBoxControl(boxPage.newBox, boxPage.newBox.Name)); // Add updated box panel
+                }
+                /* If the user moved an item to the OutBox, add it to OutBox items */
+                if (boxPage.sending != null && boxPage.sending.items.Count > 0) {
+                    foreach (var item in boxPage.sending.items) {
+                        var existingItem = OutBox.items.FirstOrDefault(i => i.Item1 == item.Item1); // Find if the item with the same name already exists in OutBox
+                        /* If the item is in the list already, update its boolean value to true */
+                        if (existingItem != null) {
+                            var index = OutBox.items.IndexOf(existingItem); // get the index of the item
+                            OutBox.items[index] = new Tuple<string, bool>(existingItem.Item1, true); // change the tuple to have a true value
+                        } 
+                        else {
+                            OutBox.items.Add(item); // If the item doesnt exist, add it to OutBox
+                        }
                     }
-                    break;
+                }
             }
         }
         /* function to handle when the user clicks the exit button */
