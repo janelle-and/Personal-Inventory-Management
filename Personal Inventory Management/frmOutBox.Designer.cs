@@ -51,6 +51,7 @@
             btnReturnItem.TabIndex = 1;
             btnReturnItem.Text = "&Return Item";
             btnReturnItem.UseVisualStyleBackColor = true;
+            btnReturnItem.Click += btnReturnItem_Click;
             // 
             // btnSave
             // 
