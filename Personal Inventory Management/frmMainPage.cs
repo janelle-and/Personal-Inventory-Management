@@ -1,47 +1,67 @@
 using Microsoft.VisualBasic.Devices;
 using System.Windows.Forms;
 namespace Personal_Inventory_Management {
-    public partial class frmMainPage : Form {
+    public partial class frmMainPage : Form
+    {
         /* initialize and display the OutBox on program start */
         static Box OutBox = new Box("OutBox", new List<Tuple<string, bool>>());
 
+        // creating a box to save initial items
+        static Box TestBox;
+
         // creating list of items for the TestBox
         List<Tuple<string, bool>> TestBoxItems = new List<Tuple<string, bool>>()
-        {
-            new Tuple<string, bool>("Item 1", false),
-            new Tuple<string, bool>("Item 2", false),
-        };
+            {
+                new Tuple<string, bool>("Item 1", false),
+                new Tuple<string, bool>("Item 2", false),
+                new Tuple<string, bool>("Item 3", false),
+                new Tuple<string, bool>("Item 4", false)
+            };
+
         String OutboxName = OutBox.Name;
         private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
-        public frmMainPage() {
+        public frmMainPage()
+        {
             InitializeComponent(); // start and show the main form
 
+            TestBox = new Box("Test Box", TestBoxItems); // initialize testBox in the constructor
+
+            _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
+
+            fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox, OutboxName)); // display the OutBox as it should always be there
+            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBox.Name)); // display the TestBox, so that we have an example box to work with
         }
         Box emptyBox = new Box("", new List<Tuple<string, bool>>()); // create an empty box to use with the add button
         private Box _currentBox; // Private backing field for the CurrentBox property
         /* Public property for accessing and setting the _currentBox field */
-        public Box CurrentBox {
+        public Box CurrentBox
+        {
             get { return _currentBox; } // Returns the value of _currentBox
             /* Sets the value of _currentBox if the new value is different from the current one */
-            set {
+            set
+            {
                 /* Check if the new value is different from the current value */
-                if (_currentBox != value) {
+                if (_currentBox != value)
+                {
                     _currentBox = value; // If different, update the private field to the new value
                 }
             }
         }
         /* function to handle what happens when the add button on the main form is clicked */
-        private void btnAdd_Click(object sender, EventArgs e) {
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
             frmBoxPage addboxpage = new frmBoxPage(emptyBox); // initialize the addboxpage form
             /* handle the logic for using the addboxpage form */
-            if (addboxpage.ShowDialog() == DialogResult.OK) {
+            if (addboxpage.ShowDialog() == DialogResult.OK)
+            {
                 Box newBox = addboxpage.newBox; // when the form is closed with the save button create a new box
                 String newBoxName = newBox.Name; // get the box name
-                fLayMainDisplay.Controls.Add(CreateBoxControl(newBox,newBoxName)); // add the box to the flowlayoutpanel
+                fLayMainDisplay.Controls.Add(CreateBoxControl(newBox, newBoxName)); // add the box to the flowlayoutpanel
             }
         }
         /* function to handle the logic of adding boxes to the flowlayoutpanel */
-        private Control CreateBoxControl(Box box,String boxName) {
+        private Control CreateBoxControl(Box box, String boxName)
+        {
             /* setup the panel for displaying the box */
             Panel panel = new Panel();
             panel.Name = box.Name;
@@ -58,23 +78,25 @@ namespace Personal_Inventory_Management {
             PictureBox pictureBox = new PictureBox();
             pictureBox.Name = "pictureBox";
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // make the image scale with the size of the panel
-            pictureBox.Size = new Size(100,100);
+            pictureBox.Size = new Size(100, 100);
             pictureBox.Location = new Point(0, 0); // make the panels always spawn from top right
             string path = "../../../project_Box_2.jpeg"; // get the path of the picture used in the panel
             /* make sure the picture exists, and if it does use it */
-            if (File.Exists(path)) {
+            if (File.Exists(path))
+            {
                 pictureBox.Image = Image.FromFile(path);
             }
             _boxPanelsDict[panel] = box; // get the box object for the new panel
             panel.Controls.Add(pictureBox); // add the picture to the panel
             panel.Click += new EventHandler(Box_Click); // make the box panel clickable
             /* get the box panel user clicked on from the available panels */
-            foreach (Control c in panel.Controls) {
+            foreach (Control c in panel.Controls)
+            {
                 c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the Box_Click function
             }
             return panel; // return the panel so the panel can be displayed
         }
-        private Control CreateOutBoxControl(Box box,String boxName)
+        private Control CreateOutBoxControl(Box box, String boxName)
         {
             Panel panel = new Panel();
             panel.Name = box.Name;
@@ -110,9 +132,11 @@ namespace Personal_Inventory_Management {
             return panel; // return the panel so the panel can be displayed
         }
         /* function to handle when the user clicks on a box panel */
-        private void Box_Click(object? sender, EventArgs e) {
+        private void Box_Click(object? sender, EventArgs e)
+        {
             /* make sure the user clicked on the actual panel */
-            if (sender.GetType() != typeof(Panel)) {
+            if (sender.GetType() != typeof(Panel))
+            {
                 MessageBox.Show("Please select a box first!"); // show a messagebox telling the user to select a panel
                 return; // return from function so nothing happens
             }
@@ -123,19 +147,23 @@ namespace Personal_Inventory_Management {
             /* Show the box form and handle the result when the user clicks Save or Cancel */
             DialogResult result = boxPage.ShowDialog(); // Get the result of the dialog
             /*If Cancel was clicked, do not save or update anything */
-            if (result == DialogResult.Cancel) {
+            if (result == DialogResult.Cancel)
+            {
                 return; // return from the function so nothing happens
             }
             /* switch case to handle the other dialog results (user actions from the boxPage form) */
-            switch (result) {
+            switch (result)
+            {
                 /* user clicked save */
                 case DialogResult.OK:
                     /* only update the panel and box if changes were made */
-                    if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items)) {
+                    if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items))
+                    {
                         _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary at the selected index
                         Label boxTitle = clickedPanel.Controls.OfType<Label>().FirstOrDefault(); // Update the label for the panel (only matters if name was changed)
                         /* only change box name if the value is not null */
-                        if (boxTitle != null) {
+                        if (boxTitle != null)
+                        {
                             boxTitle.Text = boxPage.newBox.Name; // set the box name
                         }
                     }
@@ -147,37 +175,62 @@ namespace Personal_Inventory_Management {
                     break;
             }
             /* user added item to outbox */
-            if (boxPage.moved == true){
+            if (boxPage.moved == true)
+            {
                 /* Only update if changes were made */
-                if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items)) {
+                if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items))
+                {
                     _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary
                     fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the outdated panel
                     fLayMainDisplay.Controls.Add(CreateBoxControl(boxPage.newBox, boxPage.newBox.Name)); // Add updated box panel
                 }
                 /* If the user moved an item to the OutBox, add it to OutBox items */
-                if (boxPage.sending != null && boxPage.sending.items.Count > 0) {
-                    foreach (var item in boxPage.sending.items) {
+                if (boxPage.sending != null && boxPage.sending.items.Count > 0)
+                {
+                    foreach (var item in boxPage.sending.items)
+                    {
                         var existingItem = OutBox.items.FirstOrDefault(i => i.Item1 == item.Item1); // Find if the item with the same name already exists in OutBox
                         /* If the item is in the list already, update its boolean value to true */
-                        if (existingItem != null) {
+                        if (existingItem != null)
+                        {
                             var index = OutBox.items.IndexOf(existingItem); // get the index of the item
                             OutBox.items[index] = new Tuple<string, bool>(existingItem.Item1, true); // change the tuple to have a true value
-                        } 
-                        else {
+                        }
+                        else
+                        {
                             OutBox.items.Add(item); // If the item doesnt exist, add it to OutBox
                         }
                     }
                 }
             }
         }
-        private void OutBox_Click(object? sender, EventArgs e) {
+        private void OutBox_Click(object? sender, EventArgs e)
+        {
             frmOutBox frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
             DialogResult result = frmOutBox.ShowDialog(); // Get the result of the dialog
-            
+
         }
         /* function to handle when the user clicks the exit button */
-        private void btnExit_Click(object sender, EventArgs e) {
+        private void btnExit_Click(object sender, EventArgs e)
+        {
             this.Close(); // close the main form when exit button is clicked
         }
+
+        private void btnSearch_Click(object sender, EventArgs e) { }
+        //{
+        //    // searches the boxes for the item in the search box
+        //    string searchItem = txtSearch.Text; // get the item to search for   
+        //    foreach (var box in _boxPanelsDict.Values)
+        //    {
+        //        foreach (var item in box.items)
+        //        {
+        //            if (item.Item1 == searchItem)
+        //            {
+        //                ("Item found in " + box.Name); // puts the box name in the lblSearchResult label
+        //                return; // return from the function
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
