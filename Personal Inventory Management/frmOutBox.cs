@@ -12,8 +12,8 @@ namespace Personal_Inventory_Management
 {
     public partial class frmOutBox : Form
     {
-        public Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?>>()); // Create a new box object to hold the items that have been taken out
-        public Box returnBox = new Box("Return", new List<Tuple<string, bool, string?>>()); // Create a new box object to hold the items that are being returned
+        public Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?,int?>>()); // Create a new box object to hold the items that have been taken out
+        public Box returnBox = new Box("Return", new List<Tuple<string, bool, string?,int?>>()); // Create a new box object to hold the items that are being returned
         public frmOutBox(Box outBox)
         {
             InitializeComponent();

@@ -8,7 +8,7 @@ namespace Personal_Inventory_Management
     {
         /* initialize and display the OutBox on program start */
         static Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?,int?>>());
-        static Box TestBox = new Box("Test Box", new List<Tuple<string, bool, string?>> ());
+        static Box TestBox = new Box("Test Box", new List<Tuple<string, bool, string?,int?>> ());
 
         //// creating a box to save initial items
         //static Box TestBox;
@@ -16,78 +16,6 @@ namespace Personal_Inventory_Management
         //static Box TestBox2;
 
         private static int hereforcommit = 0;
-
-        // creating list of items for the TestBox
-        //List<Tuple<string, bool, string?>> Box1Items1 = new List<Tuple<string, bool, string?>>()
-        //{
-        //    new Tuple<string, bool, string?>("Item 1 | Something Something", false, null)
-        //private static int hereforcommit = 0;
-        //// creating list of items for the TestBox
-        //List<Tuple<string, bool,string?>> Box1Items1 = new List<Tuple<string, bool,string?>>()
-        //{
-        //     new Tuple<string, bool,string?>("Item 1 | Something Something", false,null)
-
-        //};
-
-        //List<Tuple<string, bool, string?>> Box1Items2 = new List<Tuple<string, bool, string?>>()
-        //{
-        //    new Tuple<string, bool, string?>("Item 2 | Something Something", false, null)
-        //};
-        //List<Tuple<string, bool,string?>> Box1Items2 = new List<Tuple<string, bool,string?>>()
-        //{
-        //    new Tuple<string, bool,string?>("Item 2 | Something Something", false,null)
-
-        //};
-
-        //List<Tuple<string, bool, string?>> Box1Items3 = new List<Tuple<string, bool, string?>>()
-        //{
-            //new Tuple<string, bool, string?>("Item 3 | Something Something", false, null)
-        //};
-        //List<Tuple<string, bool,string?>> Box1Items3 = new List<Tuple<string, bool,string?>>()
-        //{
-        //    new Tuple<string, bool,string?>("Item 3 | Something Something", false,null)
-
-        //};
-
-        //List<Tuple<string, bool, string?>> Box1Items4 = new List<Tuple<string, bool, string?>>()
-        //{
-        //    new Tuple<string, bool, string?>("Item 4 | Something Something", false, null)
-        //};
-        //List<Tuple<string, bool,string?>> Box1Items4 = new List<Tuple<string, bool,string?>>()
-        //{
-        //    new Tuple<string, bool,string?>("Item 4 | Something Something", false,null)
-
-        //};
-
-        //// creating list of items for the TestBox2
-        //List<Tuple<string, bool>> TestBoxItems2 = new List<Tuple<string, bool>>()
-        //    {
-        //        new Tuple<string, bool>("Item 5", false),
-        //        new Tuple<string, bool>("Item 6", false),
-        //        new Tuple<string, bool>("Item 7", false),
-        //        new Tuple<string, bool>("Item 8", false)
-        //    };
-
-        //List<Tuple<string, bool,string?>> Box2Items5 = new List<Tuple<string, bool,string?>>()
-        //{
-        //     new Tuple<string, bool,string?>("Item 5 | Something Something", false,null)
-
-        //};
-        //List<Tuple<string, bool,string?>> Box2Items6 = new List<Tuple<string, bool,string?>>()
-        //{
-        //    new Tuple<string, bool,string?>("Item 6 | Something Something", false,null)
-
-        //};
-        //List<Tuple<string, bool,string?>> Box2Items7 = new List<Tuple<string, bool,string?>>()
-        //{
-        //    new Tuple<string, bool,string?>("Item 7 | Something Something", false,null)
-
-        //};
-        //List<Tuple<string, bool,string?>> Box2Items8 = new List<Tuple<string, bool,string?>>()
-        //{
-        //    new Tuple<string, bool,string?>("Item 8 | Something Something", false,null)
-
-        //};
 
         String OutboxName = OutBox.Name;
         String TestBoxName = TestBox.Name;
@@ -117,8 +45,7 @@ namespace Personal_Inventory_Management
          
         }
 
-        Box emptyBox =
-            new Box("", new List<Tuple<string, bool, string?>>()); // create an empty box to use with the add button
+        Box emptyBox = new Box("", new List<Tuple<string, bool, string?,int?>>()); // create an empty box to use with the add button
 
         private Box _currentBox; // Private backing field for the CurrentBox property
 
@@ -146,8 +73,7 @@ namespace Personal_Inventory_Management
             {
                 Box newBox = addboxpage.newBox; // when the form is closed with the save button create a new box
                 String newBoxName = newBox.Name; // get the box name
-                fLayMainDisplay.Controls.Add(CreateBoxControl(newBox,
-                    newBoxName)); // add the box to the flowlayoutpanel
+                fLayMainDisplay.Controls.Add(CreateBoxControl(newBox, newBoxName)); // add the box to the flowlayoutpanel
             }
         }
 
@@ -302,15 +228,13 @@ namespace Personal_Inventory_Management
                     foreach (var item in boxPage.sending.items)
                     {
                         var existingItem =
-                            OutBox.items.FirstOrDefault(i =>
-                                i.Item1 == item.Item1); // Find if the item with the same name already exists in OutBox
+                            OutBox.items.FirstOrDefault(i => i.Item1 == item.Item1); // Find if the item with the same name already exists in OutBox
                         /* If the item is in the list already, update its boolean value to true */
                         if (existingItem != null)
                         {
                             var index = OutBox.items.IndexOf(existingItem); // get the index of the item
                             OutBox.items[index] =
-                                new Tuple<string, bool, string?>(existingItem.Item1, true,
-                                    null); // change the tuple to have a true value
+                                new Tuple<string, bool, string?,int?>(existingItem.Item1, true, null,null); // change the tuple to have a true value
                         }
                         else
                         {
@@ -340,8 +264,7 @@ namespace Personal_Inventory_Management
                             if (boxPanel.Value.Name == item.Item3)
                             {
                                 boxPanel.Value.items.Remove(item);
-                                boxPanel.Value.items.Add(
-                                    new Tuple<string, bool, string?>(item.Item1, false, item.Item3));
+                                boxPanel.Value.items.Add(new Tuple<string, bool, string?,int?>(item.Item1, false, item.Item3,returnedItems.IndexOf(item)));
                             }
                         }
                     }
