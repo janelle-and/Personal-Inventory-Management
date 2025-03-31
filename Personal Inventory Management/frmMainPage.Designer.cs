@@ -46,6 +46,7 @@
             fLayMainDisplay.Name = "fLayMainDisplay";
             fLayMainDisplay.Size = new Size(1209, 478);
             fLayMainDisplay.TabIndex = 3;
+            fLayMainDisplay.Enter += btnSearch_Click;
             // 
             // txtSearch
             // 
