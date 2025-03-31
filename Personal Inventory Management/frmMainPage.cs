@@ -137,7 +137,7 @@ namespace Personal_Inventory_Management
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // make the image scale with the size of the panel
             pictureBox.Size = new Size(100, 100);
             pictureBox.Location = new Point(0, 0); // make the panels always spawn from top right
-            string path = "../../../Box_Save.jpeg"; // get the path of the picture used in the panel
+            string path = "../../../Sir_Box_Save.jpeg"; // get the path of the picture used in the panel
             /* make sure the picture exists, and if it does use it */
             if (File.Exists(path))
             {
