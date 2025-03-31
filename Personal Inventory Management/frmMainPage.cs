@@ -8,7 +8,6 @@ namespace Personal_Inventory_Management
     {
         /* initialize and display the OutBox on program start */
         static Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?>>());
-        List<Box> boxes = new List<Box>(); // initialize a list of boxes
 
         // creating a box to save initial items
         static Box TestBox;
