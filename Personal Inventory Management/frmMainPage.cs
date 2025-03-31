@@ -242,7 +242,11 @@ namespace Personal_Inventory_Management
         {
             frmOutBox frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
             DialogResult result = frmOutBox.ShowDialog(); // Get the result of the dialog
-            if (result == DialogResult.OK)
+            if(result == DialogResult.Cancel)// If Cancel was clicked, do not save or update anything
+            {
+                return;
+            }
+            else if (result == DialogResult.OK)// If Save was clicked, update the OutBox with the new items
             {
                 OutBox = frmOutBox.OutBox; // Update the OutBox with the new items
 

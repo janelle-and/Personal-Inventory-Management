@@ -13,7 +13,8 @@ namespace Personal_Inventory_Management {
         
         public Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?,int?>>()); // Create a new box object to hold the items that have been taken out
         public Box returnBox = new Box("Return", new List<Tuple<string, bool, string?,int?>>()); // Create a new box object to hold the items that are being returned
-        
+        public Box oldItems = new Box("OldItems", new List<Tuple<string, bool, string?, int?>>()); // Create a new box object to hold the items that are being returned
+
         public frmOutBox(Box outBox) {
             InitializeComponent();
             OutBox = outBox; // Set the OutBox object to the passed box object
@@ -22,7 +23,8 @@ namespace Personal_Inventory_Management {
             /* Add the items from the Box's items list to the ListBox display */
             if (OutBox.items.Count > 0) {
                 foreach (var item in OutBox.items) {
-                    lstOutItems.Items.Add(item);
+                    lstOutItems.Items.Add(item); // Add the item to the listbox
+                    oldItems.items.Add(item); // Add the item to the oldItems object
                 }
             }
         }
@@ -46,7 +48,8 @@ namespace Personal_Inventory_Management {
         
         /* function to handle when the user clicks the cancel button */
         private void btnCancel_Click(object sender, EventArgs e) {
-            DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel; // Set the dialog result to Cancel because the user wants to cancel the changes
+            OutBox.items = oldItems.items; // Set the OutBox object back to the oldItems object
             this.Close();
         }
     }
