@@ -110,6 +110,7 @@
             AcceptButton = btnSearch;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnExit;
             ClientSize = new Size(1247, 713);
             Controls.Add(btnSearch);
             Controls.Add(lblResult);
