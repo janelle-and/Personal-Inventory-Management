@@ -307,16 +307,8 @@ namespace Personal_Inventory_Management {
                     if (item.Item1.Contains(searchItem)) // check if the item name contains the search text
                     {
                         lblResult.Text = box.Name; // show a messagebox with the box name
-                                                   //return; // return from the function
-
-                        foreach (var item2 in box.items) // loop through all the items in the box
-                        {
-                            if (item.Item1.Contains(searchItem)) // check if the item name contains the search text
-                            {
-                                lblResult.Text += box.Name; // show a messagebox with the box name
-                            }
-                        }
                         return; // return from the function
+
                     }
                     else
                     {
