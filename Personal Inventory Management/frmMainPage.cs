@@ -1,7 +1,9 @@
 using Microsoft.VisualBasic.Devices;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-namespace Personal_Inventory_Management {
+
+namespace Personal_Inventory_Management
+{
     public partial class frmMainPage : Form
     {
         /* initialize and display the OutBox on program start */
@@ -14,25 +16,29 @@ namespace Personal_Inventory_Management {
         static Box TestBox2;
 
         private static int hereforcommit = 0;
+
         // creating list of items for the TestBox
-        List<Tuple<string, bool,string?>> Box1Items1 = new List<Tuple<string, bool,string?>>()
+        List<Tuple<string, bool, string?>> Box1Items1 = new List<Tuple<string, bool, string?>>()
         {
-             new Tuple<string, bool,string?>("Item 1 | Something Something", false,null)
+            new Tuple<string, bool, string?>("Item 1 | Something Something", false, null)
 
         };
-        List<Tuple<string, bool,string?>> Box1Items2 = new List<Tuple<string, bool,string?>>()
+
+        List<Tuple<string, bool, string?>> Box1Items2 = new List<Tuple<string, bool, string?>>()
         {
-            new Tuple<string, bool,string?>("Item 2 | Something Something", false,null)
+            new Tuple<string, bool, string?>("Item 2 | Something Something", false, null)
 
         };
-        List<Tuple<string, bool,string?>> Box1Items3 = new List<Tuple<string, bool,string?>>()
+
+        List<Tuple<string, bool, string?>> Box1Items3 = new List<Tuple<string, bool, string?>>()
         {
-            new Tuple<string, bool,string?>("Item 3 | Something Something", false,null)
+            new Tuple<string, bool, string?>("Item 3 | Something Something", false, null)
 
         };
-        List<Tuple<string, bool,string?>> Box1Items4 = new List<Tuple<string, bool,string?>>()
+
+        List<Tuple<string, bool, string?>> Box1Items4 = new List<Tuple<string, bool, string?>>()
         {
-            new Tuple<string, bool,string?>("Item 4 | Something Something", false,null)
+            new Tuple<string, bool, string?>("Item 4 | Something Something", false, null)
 
         };
 
@@ -45,54 +51,65 @@ namespace Personal_Inventory_Management {
         //        new Tuple<string, bool>("Item 8", false)
         //    };
 
-        List<Tuple<string, bool,string?>> Box2Items5 = new List<Tuple<string, bool,string?>>()
+        List<Tuple<string, bool, string?>> Box2Items5 = new List<Tuple<string, bool, string?>>()
         {
-             new Tuple<string, bool,string?>("Item 5 | Something Something", false,null)
+            new Tuple<string, bool, string?>("Item 5 | Something Something", false, null)
 
         };
-        List<Tuple<string, bool,string?>> Box2Items6 = new List<Tuple<string, bool,string?>>()
+
+        List<Tuple<string, bool, string?>> Box2Items6 = new List<Tuple<string, bool, string?>>()
         {
-            new Tuple<string, bool,string?>("Item 6 | Something Something", false,null)
+            new Tuple<string, bool, string?>("Item 6 | Something Something", false, null)
 
         };
-        List<Tuple<string, bool,string?>> Box2Items7 = new List<Tuple<string, bool,string?>>()
+
+        List<Tuple<string, bool, string?>> Box2Items7 = new List<Tuple<string, bool, string?>>()
         {
-            new Tuple<string, bool,string?>("Item 7 | Something Something", false,null)
+            new Tuple<string, bool, string?>("Item 7 | Something Something", false, null)
 
         };
-        List<Tuple<string, bool,string?>> Box2Items8 = new List<Tuple<string, bool,string?>>()
+
+        List<Tuple<string, bool, string?>> Box2Items8 = new List<Tuple<string, bool, string?>>()
         {
-            new Tuple<string, bool,string?>("Item 8 | Something Something", false,null)
+            new Tuple<string, bool, string?>("Item 8 | Something Something", false, null)
 
         };
 
         String OutboxName = OutBox.Name;
         private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
+
         public frmMainPage()
         {
             InitializeComponent(); // start and show the main form
 
             TestBox = new Box("Box 1", Box1Items1); // initialize testBox in the constructor
-            TestBox.items.AddRange(Box1Items2);//adds list to the box
-            TestBox.items.AddRange(Box1Items3);//adds list to the box
-            TestBox.items.AddRange(Box1Items4);//adds list to the box
+            TestBox.items.AddRange(Box1Items2); //adds list to the box
+            TestBox.items.AddRange(Box1Items3); //adds list to the box
+            TestBox.items.AddRange(Box1Items4); //adds list to the box
 
 
 
 
             TestBox2 = new Box("Box 2", Box2Items5); // initialize testBox2 in the constructor
-            TestBox2.items.AddRange(Box2Items6);//adds list to the box
-            TestBox2.items.AddRange(Box2Items7);//adds list to the box
-            TestBox2.items.AddRange(Box2Items8);//adds list to the box
+            TestBox2.items.AddRange(Box2Items6); //adds list to the box
+            TestBox2.items.AddRange(Box2Items7); //adds list to the box
+            TestBox2.items.AddRange(Box2Items8); //adds list to the box
 
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
 
-            fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox, OutboxName)); // display the OutBox as it should always be there
-            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBox.Name)); // display the TestBox, so that we have an example box to work with
-            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox2, TestBox2.Name)); // display the TestBox2, so that we have an example box to work with
+            fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox,
+                OutboxName)); // display the OutBox as it should always be there
+            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox,
+                TestBox.Name)); // display the TestBox, so that we have an example box to work with
+            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox2,
+                TestBox2.Name)); // display the TestBox2, so that we have an example box to work with
         }
-        Box emptyBox = new Box("", new List<Tuple<string, bool, string?>>()); // create an empty box to use with the add button
+
+        Box emptyBox =
+            new Box("", new List<Tuple<string, bool, string?>>()); // create an empty box to use with the add button
+
         private Box _currentBox; // Private backing field for the CurrentBox property
+
         /* Public property for accessing and setting the _currentBox field */
         public Box CurrentBox
         {
@@ -107,6 +124,7 @@ namespace Personal_Inventory_Management {
                 }
             }
         }
+
         /* function to handle what happens when the add button on the main form is clicked */
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -116,9 +134,11 @@ namespace Personal_Inventory_Management {
             {
                 Box newBox = addboxpage.newBox; // when the form is closed with the save button create a new box
                 String newBoxName = newBox.Name; // get the box name
-                fLayMainDisplay.Controls.Add(CreateBoxControl(newBox, newBoxName)); // add the box to the flowlayoutpanel
+                fLayMainDisplay.Controls.Add(CreateBoxControl(newBox,
+                    newBoxName)); // add the box to the flowlayoutpanel
             }
         }
+
         /* function to handle the logic of adding boxes to the flowlayoutpanel */
         private Control CreateBoxControl(Box box, String boxName)
         {
@@ -146,16 +166,20 @@ namespace Personal_Inventory_Management {
             {
                 pictureBox.Image = Image.FromFile(path);
             }
+
             _boxPanelsDict[panel] = box; // get the box object for the new panel
             panel.Controls.Add(pictureBox); // add the picture to the panel
             panel.Click += new EventHandler(Box_Click); // make the box panel clickable
             /* get the box panel user clicked on from the available panels */
             foreach (Control c in panel.Controls)
             {
-                c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the Box_Click function
+                c.Click += new EventHandler(
+                    Box_Click); // create an event handler for the click and run the Box_Click function
             }
+
             return panel; // return the panel so the panel can be displayed
         }
+
         private Control CreateOutBoxControl(Box box, String boxName)
         {
             Panel panel = new Panel();
@@ -181,16 +205,20 @@ namespace Personal_Inventory_Management {
             {
                 pictureBox.Image = Image.FromFile(path);
             }
+
             _boxPanelsDict[panel] = box; // get the box object for the new panel
             panel.Controls.Add(pictureBox); // add the picture to the panel
             panel.Click += new EventHandler(OutBox_Click); // make the box panel clickable
             /* get the box panel user clicked on from the available panels */
             foreach (Control c in panel.Controls)
             {
-                c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the OutBox_Click function
+                c.Click += new EventHandler(
+                    Box_Click); // create an event handler for the click and run the OutBox_Click function
             }
+
             return panel; // return the panel so the panel can be displayed
         }
+
         /* function to handle when the user clicks on a box panel */
         private void Box_Click(object? sender, EventArgs e)
         {
@@ -200,10 +228,13 @@ namespace Personal_Inventory_Management {
                 MessageBox.Show("Please select a box first!"); // show a messagebox telling the user to select a panel
                 return; // return from function so nothing happens
             }
+
             /* Get the Box corresponding to the clicked Panel */
             Panel clickedPanel = sender as Panel; // save the clicked panel as a variable
             Box selectedBox = _boxPanelsDict[clickedPanel]; // Get the box associated with this panel
-            frmBoxPage boxPage = new frmBoxPage(selectedBox); // Create a new frmBoxPage to passing the selected Box to be edited
+            frmBoxPage
+                boxPage = new frmBoxPage(
+                    selectedBox); // Create a new frmBoxPage to passing the selected Box to be edited
             /* Show the box form and handle the result when the user clicks Save or Cancel */
             DialogResult result = boxPage.ShowDialog(); // Get the result of the dialog
             /*If Cancel was clicked, do not save or update anything */
@@ -211,22 +242,28 @@ namespace Personal_Inventory_Management {
             {
                 return; // return from the function so nothing happens
             }
+
             /* switch case to handle the other dialog results (user actions from the boxPage form) */
             switch (result)
             {
                 /* user clicked save */
                 case DialogResult.OK:
                     /* only update the panel and box if changes were made */
-                    if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items))
+                    if (selectedBox.Name != boxPage.newBox.Name ||
+                        !selectedBox.items.SequenceEqual(boxPage.newBox.items))
                     {
-                        _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary at the selected index
-                        Label boxTitle = clickedPanel.Controls.OfType<Label>().FirstOrDefault(); // Update the label for the panel (only matters if name was changed)
+                        _boxPanelsDict[clickedPanel] =
+                            boxPage.newBox; // Update the box in the dictionary at the selected index
+                        Label boxTitle =
+                            clickedPanel.Controls.OfType<Label>()
+                                .FirstOrDefault(); // Update the label for the panel (only matters if name was changed)
                         /* only change box name if the value is not null */
                         if (boxTitle != null)
                         {
                             boxTitle.Text = boxPage.newBox.Name; // set the box name
                         }
                     }
+
                     break;
                 /* user clicked delele box */
                 case DialogResult.No:
@@ -234,6 +271,7 @@ namespace Personal_Inventory_Management {
                     fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the panel from the layout
                     break;
             }
+
             /* user added item to outbox */
             if (boxPage.moved == true)
             {
@@ -242,19 +280,25 @@ namespace Personal_Inventory_Management {
                 {
                     _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary
                     fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the outdated panel
-                    fLayMainDisplay.Controls.Add(CreateBoxControl(boxPage.newBox, boxPage.newBox.Name)); // Add updated box panel
+                    fLayMainDisplay.Controls.Add(CreateBoxControl(boxPage.newBox,
+                        boxPage.newBox.Name)); // Add updated box panel
                 }
+
                 /* If the user moved an item to the OutBox, add it to OutBox items */
                 if (boxPage.sending != null && boxPage.sending.items.Count > 0)
                 {
                     foreach (var item in boxPage.sending.items)
                     {
-                        var existingItem = OutBox.items.FirstOrDefault(i => i.Item1 == item.Item1); // Find if the item with the same name already exists in OutBox
+                        var existingItem =
+                            OutBox.items.FirstOrDefault(i =>
+                                i.Item1 == item.Item1); // Find if the item with the same name already exists in OutBox
                         /* If the item is in the list already, update its boolean value to true */
                         if (existingItem != null)
                         {
                             var index = OutBox.items.IndexOf(existingItem); // get the index of the item
-                            OutBox.items[index] = new Tuple<string, bool, string?>(existingItem.Item1, true, null); // change the tuple to have a true value
+                            OutBox.items[index] =
+                                new Tuple<string, bool, string?>(existingItem.Item1, true,
+                                    null); // change the tuple to have a true value
                         }
                         else
                         {
@@ -264,9 +308,11 @@ namespace Personal_Inventory_Management {
                 }
             }
         }
+
         private void OutBox_Click(object? sender, EventArgs e)
         {
-            frmOutBox frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
+            frmOutBox
+                frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
             DialogResult result = frmOutBox.ShowDialog(); // Get the result of the dialog
             if (result == DialogResult.OK)
             {
@@ -282,7 +328,8 @@ namespace Personal_Inventory_Management {
                             if (boxPanel.Value.Name == item.Item3)
                             {
                                 boxPanel.Value.items.Remove(item);
-                                boxPanel.Value.items.Add(new Tuple<string, bool, string?>(item.Item1, false, item.Item3));
+                                boxPanel.Value.items.Add(
+                                    new Tuple<string, bool, string?>(item.Item1, false, item.Item3));
                             }
                         }
                     }
@@ -290,7 +337,6 @@ namespace Personal_Inventory_Management {
             }
         }
 
-        }
         /* function to handle when the user clicks the exit button */
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -318,6 +364,5 @@ namespace Personal_Inventory_Management {
                 }
             }
         }
-    } 
-
+    }
 }
