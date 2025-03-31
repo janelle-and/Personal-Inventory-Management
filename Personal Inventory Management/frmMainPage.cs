@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic.Devices;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace Personal_Inventory_Management {
     public partial class frmMainPage : Form {
         

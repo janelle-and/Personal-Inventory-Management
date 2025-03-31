@@ -10,6 +10,7 @@ public partial class frmItemData : Form {
     private string[] splits;
     private string parttwo = "";
     private bool passedstatus = false;
+    
     private Box? box; // Declare a private field to store the box object
     
     public frmItemData(Box? box, int? index) {

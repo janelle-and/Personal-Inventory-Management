@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 namespace Personal_Inventory_Management {
     public partial class frmOutBox : Form {
         
