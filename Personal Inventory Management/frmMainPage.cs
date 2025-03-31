@@ -13,6 +13,7 @@ namespace Personal_Inventory_Management {
 
         static Box TestBox2;
 
+        private static int hereforcommit = 0;
         // creating list of items for the TestBox
         List<Tuple<string, bool,string?>> Box1Items1 = new List<Tuple<string, bool,string?>>()
         {
