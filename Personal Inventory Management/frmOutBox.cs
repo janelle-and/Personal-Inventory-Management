@@ -25,13 +25,14 @@ namespace Personal_Inventory_Management
             {
                 foreach (var item in OutBox.items)
                 {
-                    lstOutItems.Items.Add(item);
+                    lstOutItems.Items.Add(item);// Add the item to the listbox
                 }
             }
         }
-
+        // Function to handle when the user clicks the cancel button
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            // Set the dialog result to cancel because the user wants to cancel the changes
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
@@ -44,12 +45,14 @@ namespace Personal_Inventory_Management
 
         private void btnReturnItem_Click(object sender, EventArgs e)
         {
+            // Check if an item is selected in the listbox
             if (lstOutItems.SelectedIndex != -1)
             {
+                // Get the index of the selected item
                 int index = lstOutItems.SelectedIndex;
-                returnBox.items.Add(OutBox.items[index]);
-                OutBox.items.RemoveAt(index);
-                lstOutItems.Items.RemoveAt(index);
+                returnBox.items.Add(OutBox.items[index]); // Add the selected item to the return box
+                OutBox.items.RemoveAt(index); // Remove the selected item from the outbox
+                lstOutItems.Items.RemoveAt(index); // Remove the selected item from the listbox
             }
         }
     }

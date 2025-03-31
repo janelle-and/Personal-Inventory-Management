@@ -254,21 +254,22 @@ namespace Personal_Inventory_Management
             {
                 OutBox = frmOutBox.OutBox; // Update the OutBox with the new items
 
-                if (frmOutBox.returnBox.items.Count > 0)
+                if (frmOutBox.returnBox.items.Count > 0) // Check if there are any items to return
                 {
-                    var returnedItems = frmOutBox.returnBox.items;
-                    foreach (var item in returnedItems)
+                    var returnedItems = frmOutBox.returnBox.items; // Get the items to return
+                    // finds the box panel that the item was taken from and adds the item back to the box
+                    foreach (var item in returnedItems) 
                     {
-                        foreach (var boxPanel in _boxPanelsDict)
+                        foreach (var boxPanel in _boxPanelsDict) 
                         {
-                            if (boxPanel.Value.Name == item.Item3)
+                            if (boxPanel.Value.Name == item.Item3) // check if the box name matches the box name that the item came from
                             {
-                                if(item.Item4 != null)
+                                if(item.Item4 != null) // check if the item has an index value
                                 {
-                                    boxPanel.Value.items.RemoveAt(item.Item4.GetValueOrDefault());
-                                }
-   
-                                boxPanel.Value.items.Insert(item.Item4.GetValueOrDefault(),new Tuple<string, bool, string?,int?>(item.Item1, false, item.Item3,returnedItems.IndexOf(item)));
+                                    boxPanel.Value.items.RemoveAt(item.Item4.GetValueOrDefault()); // remove the item from the box
+                                    // add the item back to the box at the index it was taken from
+                                    boxPanel.Value.items.Insert(item.Item4.GetValueOrDefault(), new Tuple<string, bool, string?, int?>(item.Item1, false, item.Item3, returnedItems.IndexOf(item)));
+                                }    
                             }
                         }
                     }
