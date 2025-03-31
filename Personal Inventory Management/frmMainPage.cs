@@ -271,23 +271,24 @@ namespace Personal_Inventory_Management {
             if (result == DialogResult.OK)
             {
                 OutBox = frmOutBox.OutBox; // Update the OutBox with the new items
-                //checks if the return box has any items in it
+
                 if (frmOutBox.returnBox.items.Count > 0)
                 {
-                    var returnedItems = frmOutBox.returnBox.items; // get the items from the return box
+                    var returnedItems = frmOutBox.returnBox.items;
                     foreach (var item in returnedItems)
                     {
-                        foreach (Box box in boxes) // loop through all the boxes
+                        foreach (var boxPanel in _boxPanelsDict)
                         {
-                            if (box.Name == item.Item3) // check if the box name matches the item name
+                            if (boxPanel.Value.Name == item.Item3)
                             {
-                                box.items.Add(new Tuple<string, bool, string?>(item.Item1, false, item.Item3)); // add the item to the box
-                                box.items.Remove(item); // remove the item from the return box
+                                boxPanel.Value.items.Remove(item);
+                                boxPanel.Value.items.Add(new Tuple<string, bool, string?>(item.Item1, false, item.Item3));
                             }
                         }
                     }
                 }
             }
+        }
 
         }
         /* function to handle when the user clicks the exit button */
