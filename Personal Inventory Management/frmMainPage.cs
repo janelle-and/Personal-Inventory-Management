@@ -111,8 +111,7 @@ namespace Personal_Inventory_Management
             /* get the box panel user clicked on from the available panels */
             foreach (Control c in panel.Controls)
             {
-                c.Click += new EventHandler(
-                    Box_Click); // create an event handler for the click and run the Box_Click function
+                c.Click += new EventHandler(Box_Click); // create an event handler for the click and run the Box_Click function
             }
 
             return panel; // return the panel so the panel can be displayed
@@ -173,9 +172,7 @@ namespace Personal_Inventory_Management
             /* Get the Box corresponding to the clicked Panel */
             Panel clickedPanel = sender as Panel; // save the clicked panel as a variable
             Box selectedBox = _boxPanelsDict[clickedPanel]; // Get the box associated with this panel
-            frmBoxPage
-                boxPage = new frmBoxPage(
-                    selectedBox); // Create a new frmBoxPage to passing the selected Box to be edited
+            frmBoxPage boxPage = new frmBoxPage(selectedBox); // Create a new frmBoxPage to passing the selected Box to be edited
             /* Show the box form and handle the result when the user clicks Save or Cancel */
             DialogResult result = boxPage.ShowDialog(); // Get the result of the dialog
             /*If Cancel was clicked, do not save or update anything */
@@ -190,14 +187,10 @@ namespace Personal_Inventory_Management
                 /* user clicked save */
                 case DialogResult.OK:
                     /* only update the panel and box if changes were made */
-                    if (selectedBox.Name != boxPage.newBox.Name ||
-                        !selectedBox.items.SequenceEqual(boxPage.newBox.items))
+                    if (selectedBox.Name != boxPage.newBox.Name || !selectedBox.items.SequenceEqual(boxPage.newBox.items))
                     {
-                        _boxPanelsDict[clickedPanel] =
-                            boxPage.newBox; // Update the box in the dictionary at the selected index
-                        Label boxTitle =
-                            clickedPanel.Controls.OfType<Label>()
-                                .FirstOrDefault(); // Update the label for the panel (only matters if name was changed)
+                        _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary at the selected index
+                        Label boxTitle = clickedPanel.Controls.OfType<Label>().FirstOrDefault(); // Update the label for the panel (only matters if name was changed)
                         /* only change box name if the value is not null */
                         if (boxTitle != null)
                         {
@@ -221,8 +214,7 @@ namespace Personal_Inventory_Management
                 {
                     _boxPanelsDict[clickedPanel] = boxPage.newBox; // Update the box in the dictionary
                     fLayMainDisplay.Controls.Remove(clickedPanel); // Remove the outdated panel
-                    fLayMainDisplay.Controls.Add(CreateBoxControl(boxPage.newBox,
-                        boxPage.newBox.Name)); // Add updated box panel
+                    fLayMainDisplay.Controls.Add(CreateBoxControl(boxPage.newBox, boxPage.newBox.Name)); // Add updated box panel
                 }
 
                 /* If the user moved an item to the OutBox, add it to OutBox items */
@@ -230,14 +222,12 @@ namespace Personal_Inventory_Management
                 {
                     foreach (var item in boxPage.sending.items)
                     {
-                        var existingItem =
-                            OutBox.items.FirstOrDefault(i => i.Item1 == item.Item1); // Find if the item with the same name already exists in OutBox
+                        var existingItem = OutBox.items.FirstOrDefault(i => i.Item1 == item.Item1); // Find if the item with the same name already exists in OutBox
                         /* If the item is in the list already, update its boolean value to true */
                         if (existingItem != null)
                         {
                             var index = OutBox.items.IndexOf(existingItem); // get the index of the item
-                            OutBox.items[index] =
-                                new Tuple<string, bool, string?,int?>(existingItem.Item1, true, null,null); // change the tuple to have a true value
+                            OutBox.items[index] = new Tuple<string, bool, string?,int?>(existingItem.Item1, true, existingItem.Item3,existingItem.Item4); // change the tuple to have a true value
                         }
                         else
                         {
@@ -250,8 +240,7 @@ namespace Personal_Inventory_Management
 
         private void OutBox_Click(object? sender, EventArgs e)
         {
-            frmOutBox
-                frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
+            frmOutBox frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
             DialogResult result = frmOutBox.ShowDialog(); // Get the result of the dialog
             if (result == DialogResult.OK)
             {
@@ -267,7 +256,7 @@ namespace Personal_Inventory_Management
                         {
                             if (boxPanel.Value.Name == item.Item3) // check if the box name matches the box name that the item came from
                             {
-                                if(item.Item4 != null) // check if the item has an index value
+                                if (item.Item4 != null) // check if the item has an index value
                                 {
                                     boxPanel.Value.items.RemoveAt(item.Item4.GetValueOrDefault()); // remove the item from the box
                                     // add the item back to the box at the index it was taken from

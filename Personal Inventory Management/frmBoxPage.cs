@@ -25,7 +25,15 @@ namespace Personal_Inventory_Management {
             InitializeComponent();
             newBox = new Box(box.Name, new List<Tuple<string, bool,string?,int?>>(box.items)); // Create a copy of the passed box to work with in this form
             sending = new Box(box.Name, new List<Tuple<string, bool,string?,int?>>(box.items)); // create a box to store all the items that are going to be sent to the outbox
-            
+
+            sending.items.Clear(); // clear the items in the sending box
+            foreach (var item in newBox.items)
+            {
+                if (item.Item2 == true)
+                {
+                    sending.items.Add(item);
+                }
+            }
             /* Make sure the box name isn't empty */
             if (!string.IsNullOrEmpty(box.Name)) {
                 txtName.Text = box.Name; // set the Name textbox text to the name of the box
@@ -42,7 +50,7 @@ namespace Personal_Inventory_Management {
         }
         
         /* function to handle when the user clicks the save button */
-        private void button1_Click(object sender, EventArgs e) { 
+        private void btnSave_Click(object sender, EventArgs e) { 
             /* Make sure the box name isn't empty before saving */
             if (txtName.Text.Length >= 1) {
                 newBox.Name = txtName.Text; // save the new name of the box
@@ -155,13 +163,21 @@ namespace Personal_Inventory_Management {
             /* make sure the index is valid */
             if (index != -1) {
                 var selectedItem = newBox.items[index]; // store the selected item
-                var updatedItem = new Tuple<string, bool,string?,int?>(selectedItem.Item1, true,newBox.Name,index); // Create a new tuple with the same string value and the updated out status
-                newBox.items[index] = updatedItem; // Replace the old tuple in the list with the new one
-                lstItems.Items.RemoveAt(index); // remove the outdated item
-                lstItems.Items.Insert(index,newBox.items[index]); // add the updated item
-                sending.items.Add(updatedItem); // Add the entire tuple to the sending box
-                index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
-                moved = true; // item is to be moved to outbox so set moved to true
+                if (selectedItem.Item2 == true) // check if the item is already in the outbox
+                {
+                    MessageBox.Show("Item is already in the outbox"); // show a messagebox telling the user the item is already in the outbox
+                    moved = true; // set moved to true so the item is added to the outbox again
+                }
+                else
+                {
+                    var updatedItem = new Tuple<string, bool, string?, int?>(selectedItem.Item1, true, newBox.Name, index); // Create a new tuple with the same string value and the updated out status
+                    newBox.items[index] = updatedItem; // Replace the old tuple in the list with the new one
+                    lstItems.Items.RemoveAt(index); // remove the outdated item
+                    lstItems.Items.Insert(index, newBox.items[index]); // add the updated item
+                    sending.items.Add(updatedItem); // Add the entire tuple to the sending box
+                    index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
+                    moved = true; // item is to be moved to outbox so set moved to true
+                }
             }
             else {
                 MessageBox.Show("Please select an item to send to the outbox"); // show a messagebox telling the user to select an item to send to the outbox
