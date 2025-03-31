@@ -9,14 +9,7 @@ namespace Personal_Inventory_Management
         /* initialize and display the OutBox on program start */
         static Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?,int?>>());
         static Box TestBox = new Box("Test Box", new List<Tuple<string, bool, string?,int?>> ());
-
-        //// creating a box to save initial items
-        //static Box TestBox;
-
-        //static Box TestBox2;
-
-        private static int hereforcommit = 0;
-
+        
         String OutboxName = OutBox.Name;
         String TestBoxName = TestBox.Name;
         private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
@@ -24,20 +17,7 @@ namespace Personal_Inventory_Management
         public frmMainPage()
         {
             InitializeComponent(); // start and show the main form
-
-            //TestBox = new Box("Box 1", Box1Items1); // initialize testBox in the constructor
-            //TestBox.items.AddRange(Box1Items2);//adds list to the box
-            //TestBox.items.AddRange(Box1Items3);//adds list to the box
-            //TestBox.items.AddRange(Box1Items4);//adds list to the box
-
-
-
-
-            //TestBox2 = new Box("Box 2", Box2Items5); // initialize testBox2 in the constructor
-            //TestBox2.items.AddRange(Box2Items6);//adds list to the box
-            //TestBox2.items.AddRange(Box2Items7);//adds list to the box
-            //TestBox2.items.AddRange(Box2Items8);//adds list to the box
-
+            
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
 
             fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox, OutboxName)); // display the OutBox as it should always be there
@@ -152,7 +132,6 @@ namespace Personal_Inventory_Management
                 c.Click += new EventHandler(
                     Box_Click); // create an event handler for the click and run the OutBox_Click function
             }
-
             return panel; // return the panel so the panel can be displayed
         }
 
@@ -197,8 +176,8 @@ namespace Personal_Inventory_Management
                             boxTitle.Text = boxPage.newBox.Name; // set the box name
                         }
                     }
-
                     break;
+                
                 /* user clicked delele box */
                 case DialogResult.No:
                     _boxPanelsDict.Remove(clickedPanel); // Remove the box reference from the dictionary
@@ -238,6 +217,7 @@ namespace Personal_Inventory_Management
             }
         }
 
+        /* function to handle when the user clicks on the outbox */
         private void OutBox_Click(object? sender, EventArgs e)
         {
             frmOutBox frmOutBox = new frmOutBox(OutBox); // Create a new frmOutBox to passing the selected Box to be edited
@@ -272,12 +252,8 @@ namespace Personal_Inventory_Management
                 }
             }
         }
-        /* function to handle when the user clicks the exit button */
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close(); // close the main form when exit button is clicked
-        }
 
+        /* function to handle when the user clicks the search button */
         private void btnSearch_Click(object sender, EventArgs e)
         {
             // searches the boxes for the item in the search box, if the search has a similar name to an item in the box, it will display the box name
@@ -300,6 +276,12 @@ namespace Personal_Inventory_Management
             {
                 lblResult.Text = "Item not found"; // show a messagebox with the box name
             }
+        }
+        
+        /* function to handle when the user clicks the exit button */
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close(); // close the main form when exit button is clicked
         }
     }
 }
