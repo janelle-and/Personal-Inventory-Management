@@ -9,23 +9,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace Personal_Inventory_Management {
     public partial class frmBoxPage : Form {
+        
         public Box newBox { get;  set; } // initialize a new box object
         public Box sending { get ; set; } // initialize the box for sending things to the outbox
         public bool moved; // flag for checking if the item has been moved
+        
         /* variables to store the data gotten from the itemData form */
         string itemname = "";
         string itemdescription = "";
         bool itemstatus = false;
         string TotalItem = "";
+        
         public frmBoxPage(Box box) {
             InitializeComponent();
             newBox = new Box(box.Name, new List<Tuple<string, bool,string?,int?>>(box.items)); // Create a copy of the passed box to work with in this form
-            sending = new Box(box.Name, new List<Tuple<string, bool,string?,int?>>(box.items));
+            sending = new Box(box.Name, new List<Tuple<string, bool,string?,int?>>(box.items)); // create a box to store all the items that are going to be sent to the outbox
+            
             /* Make sure the box name isn't empty */
             if (!string.IsNullOrEmpty(box.Name)) {
                 txtName.Text = box.Name; // set the Name textbox text to the name of the box
             }
+            
             lstItems.Items.Clear(); // Clear any existing items in the listbox before adding new ones
+            
             /* Add the items from the Box's items list to the ListBox display */
             if (box.items.Count > 0) {
                 foreach (var item in box.items) {
@@ -33,6 +39,7 @@ namespace Personal_Inventory_Management {
                 }
             }
         }
+        
         /* function to handle when the user clicks the save button */
         private void button1_Click(object sender, EventArgs e) { 
             /* Make sure the box name isn't empty before saving */
@@ -45,10 +52,12 @@ namespace Personal_Inventory_Management {
                 MessageBox.Show("Please enter a name for the box"); // show a message box telling the user to give the box name
             }
         }
+        
         /* function to handle when the user clicks the add item button */
         private void btnAddItem_Click(object sender, EventArgs e) {
             frmItemData itemData = new frmItemData(null,null); // create a new instance of the itemData form
             DialogResult result = itemData.ShowDialog(); // show the form and save the result
+            
             /* switch case to handle which button was pressedi in the form */
             switch (result) {
                 /* cancel button was pressed so do nothing */
@@ -59,39 +68,48 @@ namespace Personal_Inventory_Management {
                     itemname = itemData.itemname; // save the itemname
                     itemdescription = itemData.itemdesc; // save the itemdescription
                     TotalItem = itemData.itemname; // set the TotalItem to the name so the item description can be added to it
+                    
                     /* check if the user left the item description empty */
                     if (string.IsNullOrEmpty(itemdescription)) {
                         TotalItem = itemData.itemname + " | No description provided";
                         newBox.items.Add(new Tuple<string, bool,string?,int?>(TotalItem, false,null,null)); // currently hard coded but this adds the item to the box item list
                         lstItems.Items.Add(newBox.items.Last()); // display the newly added item in the listbox display
                     }
-                    else
-                    {
+                    /* description not empty so add it */
+                    else {
                         TotalItem += " | " + itemdescription;
                         newBox.items.Add(new Tuple<string, bool, string?,int?>(TotalItem, false,null,null));
                         lstItems.Items.Add(newBox.items.Last());
                     }
-                    /* reset the variables after the item is added */
                     break;
             }
         }
+        
         /* function to handle when the user clicks the update item button */
         private void btnUpdateItem_Click(object sender, EventArgs e) {
             int index = lstItems.SelectedIndex; // get the index of the selected item
             /* make sure its a valid index before doing anything */
             if (index != -1) {
+                /* create a new instance of the ItemData form with the box data and index of the seledted item */
                 frmItemData itemData = new frmItemData(newBox,index);
-                DialogResult result = itemData.ShowDialog();
+                DialogResult result = itemData.ShowDialog(); // store the result of whether the user clicked save or cancel
+                
+                /* switch case to deal with the result */
                 switch (result) {
+                    /* user clicked cancel so do nothing */
                     case DialogResult.Cancel:
                         return;
+                    /* user clicked save */
                     case DialogResult.OK:
                         itemname = itemData.itemname; // save the itemname
                         itemdescription = itemData.itemdesc; // save the itemdescription
                         TotalItem = itemData.itemname; // set the TotalItem to the name so the item description can be added to it
+                        
+                        /* check if the description is empty */
                         if (string.IsNullOrEmpty(itemdescription)) {
-                            TotalItem = itemData.itemname + " | No description provided";
+                            TotalItem = itemData.itemname + " | No description provided"; // provide a default description if none provided
                         }
+                        /* description not empty so add it */
                         else {
                             TotalItem += " | "  + itemdescription;
                         }
@@ -106,9 +124,11 @@ namespace Personal_Inventory_Management {
             }
             index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
         }
+        
         /* function to handle when the user clicks the delete item button */
         private void btnDeleteItem_Click(object sender, EventArgs e) {
             int index = lstItems.SelectedIndex; // get the index of the selected item
+            
             /* make sure its a valid index before doing anything */
             if (index != -1) {
                 newBox.items.RemoveAt(index); // remove the item from the box list
@@ -119,15 +139,19 @@ namespace Personal_Inventory_Management {
             }
             index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
         }
+        
         /* function to handle when the user clicks the delete box button */
         private void btnDeleteBox_Click_1(object sender, EventArgs e) {
             DialogResult = DialogResult.No; // send a different DialogResult if the user wants to delete the box
             this.Close();
         }
+        
         /* function to handle when the user clicks the move to outbox button */
         private void btnMoveToOutBox_Click(object sender, EventArgs e) {
-            moved = false;
+            moved = false; // default the moved variable to false
             int index = lstItems.SelectedIndex; // Get the index of the selected item
+            
+            /* make sure the index is valid */
             if (index != -1) {
                 var selectedItem = newBox.items[index]; // store the selected item
                 var updatedItem = new Tuple<string, bool,string?,int?>(selectedItem.Item1, true,newBox.Name,index); // Create a new tuple with the same string value and the updated out status
@@ -136,13 +160,13 @@ namespace Personal_Inventory_Management {
                 lstItems.Items.Insert(index,newBox.items[index]); // add the updated item
                 sending.items.Add(updatedItem); // Add the entire tuple to the sending box
                 index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
-                moved = true;
-
+                moved = true; // item is to be moved to outbox so set moved to true
             }
             else {
                 MessageBox.Show("Please select an item to send to the outbox"); // show a messagebox telling the user to select an item to send to the outbox
             }
         }
+        
         /* function to handle when the user clicks the cancel button */
         private void btnCancel_Click(object sender, EventArgs e) {
             DialogResult = DialogResult.Cancel;
