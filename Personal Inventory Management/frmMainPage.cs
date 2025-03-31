@@ -14,22 +14,25 @@ namespace Personal_Inventory_Management {
         static Box TestBox2;
 
         // creating list of items for the TestBox
-        List<Tuple<string, bool>> Box1Items1 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool,string?>> Box1Items1 = new List<Tuple<string, bool,string?>>()
         {
-             new Tuple<string, bool>("Item 1 | Something Something", false)
+             new Tuple<string, bool,string?>("Item 1 | Something Something", false,null)
 
         };
-        List<Tuple<string, bool>> Box1Items2 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool,string?>> Box1Items2 = new List<Tuple<string, bool,string?>>()
         {
-                new Tuple<string, bool>("Item 2 | Something Something", false),
+            new Tuple<string, bool,string?>("Item 2 | Something Something", false,null)
+
         };
-        List<Tuple<string, bool>> Box1Items3 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool,string?>> Box1Items3 = new List<Tuple<string, bool,string?>>()
         {
-                new Tuple<string, bool>("Item 3 | Something Something", false),
+            new Tuple<string, bool,string?>("Item 3 | Something Something", false,null)
+
         };
-        List<Tuple<string, bool>> Box1Items4 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool,string?>> Box1Items4 = new List<Tuple<string, bool,string?>>()
         {
-                new Tuple<string, bool>("Item 4 | Something Something", false),
+            new Tuple<string, bool,string?>("Item 4 | Something Something", false,null)
+
         };
 
         //// creating list of items for the TestBox2
@@ -41,22 +44,25 @@ namespace Personal_Inventory_Management {
         //        new Tuple<string, bool>("Item 8", false)
         //    };
 
-        List<Tuple<string, bool>> Box2Items5 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool,string?>> Box2Items5 = new List<Tuple<string, bool,string?>>()
         {
-             new Tuple<string, bool>("Item 5 | Something Something", false)
+             new Tuple<string, bool,string?>("Item 5 | Something Something", false,null)
 
         };
-        List<Tuple<string, bool>> Box2Items6 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool,string?>> Box2Items6 = new List<Tuple<string, bool,string?>>()
         {
-                new Tuple<string, bool>("Item 6 | Something Something", false),
+            new Tuple<string, bool,string?>("Item 6 | Something Something", false,null)
+
         };
-        List<Tuple<string, bool>> Box2Items7 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool,string?>> Box2Items7 = new List<Tuple<string, bool,string?>>()
         {
-                new Tuple<string, bool>("Item 7 | Something Something", false),
+            new Tuple<string, bool,string?>("Item 7 | Something Something", false,null)
+
         };
-        List<Tuple<string, bool>> Box2Items8 = new List<Tuple<string, bool>>()
+        List<Tuple<string, bool,string?>> Box2Items8 = new List<Tuple<string, bool,string?>>()
         {
-                new Tuple<string, bool>("Item 8 | Something Something", false),
+            new Tuple<string, bool,string?>("Item 8 | Something Something", false,null)
+
         };
 
         String OutboxName = OutBox.Name;
