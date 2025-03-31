@@ -299,7 +299,7 @@ namespace Personal_Inventory_Management
                     }
                 }
             }
-            if (!found || searchItem == "")
+            if (!found)
             {
                 lblResult.Text = "Item not found"; // show a messagebox with the box name
             }
