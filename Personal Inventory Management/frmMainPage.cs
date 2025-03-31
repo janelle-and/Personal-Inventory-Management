@@ -41,7 +41,7 @@ namespace Personal_Inventory_Management
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
 
             fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox, OutboxName)); // display the OutBox as it should always be there
-            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBoxName));
+            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBoxName)); //display the test Box
          
         }
 
