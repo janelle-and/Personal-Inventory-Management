@@ -263,7 +263,11 @@ namespace Personal_Inventory_Management
                         {
                             if (boxPanel.Value.Name == item.Item3)
                             {
-                                boxPanel.Value.items.Remove(item);
+                                if(item.Item4 != null)
+                                {
+                                    boxPanel.Value.items.RemoveAt(item.Item4.GetValueOrDefault());
+                                }
+                                    //boxPanel.Value.items.RemoveAt(item.Item4.);
                                 boxPanel.Value.items.Add(new Tuple<string, bool, string?,int?>(item.Item1, false, item.Item3,returnedItems.IndexOf(item)));
                             }
                         }
