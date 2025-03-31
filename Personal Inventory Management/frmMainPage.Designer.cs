@@ -91,9 +91,8 @@
             // 
             lblResult.Location = new Point(995, 621);
             lblResult.Name = "lblResult";
-            lblResult.Size = new Size(227, 73);
+            lblResult.Size = new Size(227, 30);
             lblResult.TabIndex = 9;
-            lblResult.Text = "This is some placeholder text";
             // 
             // btnSearch
             // 
@@ -119,6 +118,7 @@
             Controls.Add(fLayMainDisplay);
             Name = "frmMainPage";
             Text = "Personal Inventory Management System";
+            Enter += btnSearch_Click;
             ResumeLayout(false);
             PerformLayout();
         }
