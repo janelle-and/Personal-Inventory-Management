@@ -283,27 +283,25 @@ namespace Personal_Inventory_Management
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            
             // searches the boxes for the item in the search box, if the search has a similar name to an item in the box, it will display the box name
             string searchItem = txtSearch.Text; // get the search text
+            bool found = false;
             foreach (var box in _boxPanelsDict.Values) // loop through all the boxes
             {
-               
                 foreach (var item in box.items) // loop through all the items in the box
                 {
                     //MessageBox.Show("Search button clicked");
                     if (item.Item1.Contains(searchItem)) // check if the item name contains the search text
                     {
+                        found = true;
                         lblResult.Text = box.Name; // show a messagebox with the box name
-                        //lblResult.Text = "Item not found"; // show a messagebox with the box name
                         return; // return from the function
-
-                    }
-                    else
-                    {
-                        lblResult.Text = "Item not found"; // show a messagebox with the box name
                     }
                 }
+            }
+            if (!found)
+            {
+                lblResult.Text = "Item not found"; // show a messagebox with the box name
             }
         }
     }
