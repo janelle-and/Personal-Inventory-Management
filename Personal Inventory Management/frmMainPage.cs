@@ -9,10 +9,10 @@ namespace Personal_Inventory_Management
         /* initialize and display the OutBox on program start */
         static Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?>>());
 
-        // creating a box to save initial items
-        static Box TestBox;
+        //// creating a box to save initial items
+        //static Box TestBox;
 
-        static Box TestBox2;
+        //static Box TestBox2;
 
         private static int hereforcommit = 0;
 
@@ -20,26 +20,43 @@ namespace Personal_Inventory_Management
         List<Tuple<string, bool, string?>> Box1Items1 = new List<Tuple<string, bool, string?>>()
         {
             new Tuple<string, bool, string?>("Item 1 | Something Something", false, null)
+        //private static int hereforcommit = 0;
+        //// creating list of items for the TestBox
+        //List<Tuple<string, bool,string?>> Box1Items1 = new List<Tuple<string, bool,string?>>()
+        //{
+        //     new Tuple<string, bool,string?>("Item 1 | Something Something", false,null)
 
         };
 
         List<Tuple<string, bool, string?>> Box1Items2 = new List<Tuple<string, bool, string?>>()
         {
             new Tuple<string, bool, string?>("Item 2 | Something Something", false, null)
+        //};
+        //List<Tuple<string, bool,string?>> Box1Items2 = new List<Tuple<string, bool,string?>>()
+        //{
+        //    new Tuple<string, bool,string?>("Item 2 | Something Something", false,null)
 
         };
 
         List<Tuple<string, bool, string?>> Box1Items3 = new List<Tuple<string, bool, string?>>()
         {
             new Tuple<string, bool, string?>("Item 3 | Something Something", false, null)
+        //};
+        //List<Tuple<string, bool,string?>> Box1Items3 = new List<Tuple<string, bool,string?>>()
+        //{
+        //    new Tuple<string, bool,string?>("Item 3 | Something Something", false,null)
 
         };
 
         List<Tuple<string, bool, string?>> Box1Items4 = new List<Tuple<string, bool, string?>>()
         {
             new Tuple<string, bool, string?>("Item 4 | Something Something", false, null)
+        //};
+        //List<Tuple<string, bool,string?>> Box1Items4 = new List<Tuple<string, bool,string?>>()
+        //{
+        //    new Tuple<string, bool,string?>("Item 4 | Something Something", false,null)
 
-        };
+        //};
 
         //// creating list of items for the TestBox2
         //List<Tuple<string, bool>> TestBoxItems2 = new List<Tuple<string, bool>>()
@@ -50,29 +67,26 @@ namespace Personal_Inventory_Management
         //        new Tuple<string, bool>("Item 8", false)
         //    };
 
-        List<Tuple<string, bool, string?>> Box2Items5 = new List<Tuple<string, bool, string?>>()
-        {
-            new Tuple<string, bool, string?>("Item 5 | Something Something", false, null)
+        //List<Tuple<string, bool,string?>> Box2Items5 = new List<Tuple<string, bool,string?>>()
+        //{
+        //     new Tuple<string, bool,string?>("Item 5 | Something Something", false,null)
 
-        };
+        //};
+        //List<Tuple<string, bool,string?>> Box2Items6 = new List<Tuple<string, bool,string?>>()
+        //{
+        //    new Tuple<string, bool,string?>("Item 6 | Something Something", false,null)
 
-        List<Tuple<string, bool, string?>> Box2Items6 = new List<Tuple<string, bool, string?>>()
-        {
-            new Tuple<string, bool, string?>("Item 6 | Something Something", false, null)
+        //};
+        //List<Tuple<string, bool,string?>> Box2Items7 = new List<Tuple<string, bool,string?>>()
+        //{
+        //    new Tuple<string, bool,string?>("Item 7 | Something Something", false,null)
 
-        };
+        //};
+        //List<Tuple<string, bool,string?>> Box2Items8 = new List<Tuple<string, bool,string?>>()
+        //{
+        //    new Tuple<string, bool,string?>("Item 8 | Something Something", false,null)
 
-        List<Tuple<string, bool, string?>> Box2Items7 = new List<Tuple<string, bool, string?>>()
-        {
-            new Tuple<string, bool, string?>("Item 7 | Something Something", false, null)
-
-        };
-
-        List<Tuple<string, bool, string?>> Box2Items8 = new List<Tuple<string, bool, string?>>()
-        {
-            new Tuple<string, bool, string?>("Item 8 | Something Something", false, null)
-
-        };
+        //};
 
         String OutboxName = OutBox.Name;
         private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
@@ -82,26 +96,23 @@ namespace Personal_Inventory_Management
             InitializeComponent(); // start and show the main form
 
             TestBox = new Box("Box 1", Box1Items1); // initialize testBox in the constructor
-            TestBox.items.AddRange(Box1Items2); //adds list to the box
-            TestBox.items.AddRange(Box1Items3); //adds list to the box
-            TestBox.items.AddRange(Box1Items4); //adds list to the box
+            TestBox.items.AddRange(Box1Items2);//adds list to the box
+            TestBox.items.AddRange(Box1Items3);//adds list to the box
+            TestBox.items.AddRange(Box1Items4);//adds list to the box
 
 
 
 
-            TestBox2 = new Box("Box 2", Box2Items5); // initialize testBox2 in the constructor
-            TestBox2.items.AddRange(Box2Items6); //adds list to the box
-            TestBox2.items.AddRange(Box2Items7); //adds list to the box
-            TestBox2.items.AddRange(Box2Items8); //adds list to the box
+            //TestBox2 = new Box("Box 2", Box2Items5); // initialize testBox2 in the constructor
+            //TestBox2.items.AddRange(Box2Items6);//adds list to the box
+            //TestBox2.items.AddRange(Box2Items7);//adds list to the box
+            //TestBox2.items.AddRange(Box2Items8);//adds list to the box
 
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
 
-            fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox,
-                OutboxName)); // display the OutBox as it should always be there
-            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox,
-                TestBox.Name)); // display the TestBox, so that we have an example box to work with
-            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox2,
-                TestBox2.Name)); // display the TestBox2, so that we have an example box to work with
+            fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox, OutboxName)); // display the OutBox as it should always be there
+            //fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBox.Name)); // display the TestBox, so that we have an example box to work with
+            //fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox2, TestBox2.Name)); // display the TestBox2, so that we have an example box to work with
         }
 
         Box emptyBox =
@@ -335,7 +346,6 @@ namespace Personal_Inventory_Management
                 }
             }
         }
-
         /* function to handle when the user clicks the exit button */
         private void btnExit_Click(object sender, EventArgs e)
         {
