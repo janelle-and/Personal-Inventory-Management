@@ -160,6 +160,9 @@ namespace Personal_Inventory_Management
         /* function to handle when the user clicks on a box panel */
         private void Box_Click(object? sender, EventArgs e)
         {
+            txtSearch.Text = "";
+            lblResult.Text = "";
+
             /* make sure the user clicked on the actual panel */
             if (sender.GetType() != typeof(Panel))
             {
