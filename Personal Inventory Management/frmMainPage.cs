@@ -17,40 +17,40 @@ namespace Personal_Inventory_Management
         private static int hereforcommit = 0;
 
         // creating list of items for the TestBox
-        List<Tuple<string, bool, string?>> Box1Items1 = new List<Tuple<string, bool, string?>>()
-        {
-            new Tuple<string, bool, string?>("Item 1 | Something Something", false, null)
+        //List<Tuple<string, bool, string?>> Box1Items1 = new List<Tuple<string, bool, string?>>()
+        //{
+        //    new Tuple<string, bool, string?>("Item 1 | Something Something", false, null)
         //private static int hereforcommit = 0;
         //// creating list of items for the TestBox
         //List<Tuple<string, bool,string?>> Box1Items1 = new List<Tuple<string, bool,string?>>()
         //{
         //     new Tuple<string, bool,string?>("Item 1 | Something Something", false,null)
 
-        };
+        //};
 
-        List<Tuple<string, bool, string?>> Box1Items2 = new List<Tuple<string, bool, string?>>()
-        {
-            new Tuple<string, bool, string?>("Item 2 | Something Something", false, null)
+        //List<Tuple<string, bool, string?>> Box1Items2 = new List<Tuple<string, bool, string?>>()
+        //{
+        //    new Tuple<string, bool, string?>("Item 2 | Something Something", false, null)
         //};
         //List<Tuple<string, bool,string?>> Box1Items2 = new List<Tuple<string, bool,string?>>()
         //{
         //    new Tuple<string, bool,string?>("Item 2 | Something Something", false,null)
 
-        };
+        //};
 
-        List<Tuple<string, bool, string?>> Box1Items3 = new List<Tuple<string, bool, string?>>()
-        {
-            new Tuple<string, bool, string?>("Item 3 | Something Something", false, null)
+        //List<Tuple<string, bool, string?>> Box1Items3 = new List<Tuple<string, bool, string?>>()
+        //{
+            //new Tuple<string, bool, string?>("Item 3 | Something Something", false, null)
         //};
         //List<Tuple<string, bool,string?>> Box1Items3 = new List<Tuple<string, bool,string?>>()
         //{
         //    new Tuple<string, bool,string?>("Item 3 | Something Something", false,null)
 
-        };
+        //};
 
-        List<Tuple<string, bool, string?>> Box1Items4 = new List<Tuple<string, bool, string?>>()
-        {
-            new Tuple<string, bool, string?>("Item 4 | Something Something", false, null)
+        //List<Tuple<string, bool, string?>> Box1Items4 = new List<Tuple<string, bool, string?>>()
+        //{
+        //    new Tuple<string, bool, string?>("Item 4 | Something Something", false, null)
         //};
         //List<Tuple<string, bool,string?>> Box1Items4 = new List<Tuple<string, bool,string?>>()
         //{
@@ -95,10 +95,10 @@ namespace Personal_Inventory_Management
         {
             InitializeComponent(); // start and show the main form
 
-            TestBox = new Box("Box 1", Box1Items1); // initialize testBox in the constructor
-            TestBox.items.AddRange(Box1Items2);//adds list to the box
-            TestBox.items.AddRange(Box1Items3);//adds list to the box
-            TestBox.items.AddRange(Box1Items4);//adds list to the box
+            //TestBox = new Box("Box 1", Box1Items1); // initialize testBox in the constructor
+            //TestBox.items.AddRange(Box1Items2);//adds list to the box
+            //TestBox.items.AddRange(Box1Items3);//adds list to the box
+            //TestBox.items.AddRange(Box1Items4);//adds list to the box
 
 
 
