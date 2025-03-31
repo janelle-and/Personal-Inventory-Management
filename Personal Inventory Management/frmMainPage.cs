@@ -7,7 +7,7 @@ namespace Personal_Inventory_Management
     public partial class frmMainPage : Form
     {
         /* initialize and display the OutBox on program start */
-        static Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?>>());
+        static Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?,int?>>());
         static Box TestBox = new Box("Test Box", new List<Tuple<string, bool, string?>> ());
 
         //// creating a box to save initial items
