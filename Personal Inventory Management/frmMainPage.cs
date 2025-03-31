@@ -267,8 +267,8 @@ namespace Personal_Inventory_Management
                                 {
                                     boxPanel.Value.items.RemoveAt(item.Item4.GetValueOrDefault());
                                 }
-                                    //boxPanel.Value.items.RemoveAt(item.Item4.);
-                                boxPanel.Value.items.Add(new Tuple<string, bool, string?,int?>(item.Item1, false, item.Item3,returnedItems.IndexOf(item)));
+   
+                                boxPanel.Value.items.Insert(item.Item4.GetValueOrDefault(),new Tuple<string, bool, string?,int?>(item.Item1, false, item.Item3,returnedItems.IndexOf(item)));
                             }
                         }
                     }
