@@ -8,6 +8,7 @@ namespace Personal_Inventory_Management
     {
         /* initialize and display the OutBox on program start */
         static Box OutBox = new Box("OutBox", new List<Tuple<string, bool, string?>>());
+        static Box TestBox = new Box("Test Box", new List<Tuple<string, bool, string?>> ());
 
         //// creating a box to save initial items
         //static Box TestBox;
@@ -89,6 +90,7 @@ namespace Personal_Inventory_Management
         //};
 
         String OutboxName = OutBox.Name;
+        String TestBoxName = TestBox.Name;
         private Dictionary<Panel, Box> _boxPanelsDict; // initialize a dictionary to store the box objects at each panel
 
         public frmMainPage()
@@ -111,8 +113,8 @@ namespace Personal_Inventory_Management
             _boxPanelsDict = new Dictionary<Panel, Box>(); // create the dictionary
 
             fLayMainDisplay.Controls.Add(CreateOutBoxControl(OutBox, OutboxName)); // display the OutBox as it should always be there
-            //fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBox.Name)); // display the TestBox, so that we have an example box to work with
-            //fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox2, TestBox2.Name)); // display the TestBox2, so that we have an example box to work with
+            fLayMainDisplay.Controls.Add(CreateBoxControl(TestBox, TestBoxName));
+         
         }
 
         Box emptyBox =
