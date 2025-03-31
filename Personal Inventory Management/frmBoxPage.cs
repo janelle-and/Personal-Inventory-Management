@@ -133,7 +133,7 @@ namespace Personal_Inventory_Management {
                 var updatedItem = new Tuple<string, bool,string?,int?>(selectedItem.Item1, true,newBox.Name,index); // Create a new tuple with the same string value and the updated out status
                 newBox.items[index] = updatedItem; // Replace the old tuple in the list with the new one
                 lstItems.Items.RemoveAt(index); // remove the outdated item
-                lstItems.Items.Add(newBox.items[index]); // add the updated item
+                lstItems.Items.Insert(index,newBox.items[index]); // add the updated item
                 sending.items.Add(updatedItem); // Add the entire tuple to the sending box
                 index = -1; // set the index to an invalid index to prevent trying to immediately access an item that doesnt exist anymore
                 moved = true;
